@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#b3261e">
+  <meta name="description" content="Registro de intervenciones de guardavidas.">
+  <title>Registro Guardavidas</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+  <header class="header">
+    <div class="header-container">
+      <a href="#inicio" class="brand" aria-label="Registro Guardavidas - Inicio">
+        <span class="brand-icon" aria-hidden="true">+</span>
+        <span>
+          <strong>REGISTRO</strong>
+          <small>GUARDAVIDAS</small>
+        </span>
+      </a>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+      <nav class="nav" id="nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#registrar">Registrar</a>
+        <a href="#historial">Historial</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-container">
+        <div class="hero-copy">
+          <span class="eyebrow">MONTE HERMOSO · REGISTRO DE INTERVENCIONES</span>
+          <h1>REGISTRÁ CADA INTERVENCIÓN <span>EN EL MOMENTO.</span></h1>
+          <p>
+            Una herramienta simple para ordenar la información diaria y facilitar
+            los resúmenes de rescates, asistencias y primeros auxilios.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#registrar" class="btn btn-primary">+ Nueva intervención</a>
+            <a href="#historial" class="btn btn-secondary">Ver historial</a>
+          </div>
+        </div>
+
+        <div class="today-card">
+          <span class="today-label">HOY</span>
+          <strong id="todayTotal">0</strong>
+          <p>intervenciones registradas</p>
+          <div class="today-line"></div>
+          <small id="todayDate"></small>
+        </div>
+      </div>
+    </section>
+
+    <section class="summary-section">
+      <div class="section-container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow dark">RESUMEN DEL MES</span>
+            <h2>DATOS RÁPIDOS</h2>
+          </div>
+          <input type="month" id="summaryMonth" class="month-input" aria-label="Mes del resumen">
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card total">
+            <span>Total</span>
+            <strong id="statTotal">0</strong>
+            <small>intervenciones</small>
+          </article>
+
+          <article class="stat-card">
+            <span>Rescates</span>
+            <strong id="statRescates">0</strong>
+            <small>registrados</small>
+          </article>
+
+          <article class="stat-card">
+            <span>Asistencias</span>
+            <strong id="statAsistencias">0</strong>
+            <small>en y fuera del agua</small>
+          </article>
+
+          <article class="stat-card">
+            <span>Primeros auxilios</span>
+            <strong id="statPrimerosAuxilios">0</strong>
+            <small>atenciones</small>
+          </article>
+
+          <article class="stat-card">
+            <span>Semirrígido</span>
+            <strong id="statSemirrigido">0</strong>
+            <small>intervenciones</small>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section" id="registrar">
+      <div class="section-container form-layout">
+        <div class="form-intro">
+          <span class="eyebrow dark">NUEVO REGISTRO</span>
+          <h2>CARGÁ LA INTERVENCIÓN</h2>
+          <p>
+            Completá sólo los datos necesarios. La idea es que pueda registrarse
+            desde el celular en pocos segundos.
+          </p>
+
+          <div class="form-tip">
+            <strong>Dato importante</strong>
+            <p>Fecha y hora se completan automáticamente, pero podés modificarlas.</p>
+          </div>
+        </div>
+
+        <form class="intervention-form" id="interventionForm">
+          <div class="form-row two-columns">
+            <div class="field">
+              <label for="fecha">Fecha *</label>
+              <input type="date" id="fecha" name="fecha" required>
+            </div>
+
+            <div class="field">
+              <label for="hora">Hora *</label>
+              <input type="time" id="hora" name="hora" required>
+            </div>
+          </div>
+
+          <div class="form-row two-columns">
+            <div class="field">
+              <label for="puesto">Puesto *</label>
+              <input type="text" id="puesto" name="puesto" placeholder="Ej: Puesto 4" required>
+            </div>
+
+            <div class="field">
+              <label for="bandera">Bandera *</label>
+              <select id="bandera" name="bandera" required>
+                <option value="">Seleccionar</option>
+                <option value="Verde">Verde</option>
+                <option value="Amarilla">Amarilla</option>
+                <option value="Roja">Roja</option>
+                <option value="Negra">Negra</option>
+                <option value="Sin dato">Sin dato</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="tipo">Tipo de intervención *</label>
+            <select id="tipo" name="tipo" required>
+              <option value="">Seleccionar</option>
+              <option value="Rescate">Rescate</option>
+              <option value="Asistencia en agua">Asistencia en agua</option>
+              <option value="Asistencia fuera del agua">Asistencia fuera del agua</option>
+              <option value="Primeros auxilios">Primeros auxilios</option>
+              <option value="Rescate con semirrígido">Rescate con semirrígido</option>
+              <option value="Prevención">Prevención</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="form-row two-columns">
+            <div class="field">
+              <label for="personas">Personas involucradas</label>
+              <input type="number" id="personas" name="personas" min="1" value="1">
+            </div>
+
+            <div class="field">
+              <label for="lugar">Lugar *</label>
+              <input type="text" id="lugar" name="lugar" placeholder="Ej: Frente al puesto / sector" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="motivo">Motivo *</label>
+            <textarea id="motivo" name="motivo" rows="3" placeholder="¿Qué ocurrió?" required></textarea>
+          </div>
+
+          <div class="field">
+            <label for="resolucion">Resolución *</label>
+            <textarea id="resolucion" name="resolucion" rows="3" placeholder="¿Cómo finalizó la intervención?" required></textarea>
+          </div>
+
+          <div class="field">
+            <label for="observaciones">Observaciones</label>
+            <textarea id="observaciones" name="observaciones" rows="3" placeholder="Información adicional (opcional)"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary submit-btn">Registrar intervención</button>
+          <p class="form-message" id="formMessage" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="history-section" id="historial">
+      <div class="section-container">
+        <div class="section-heading history-heading">
+          <div>
+            <span class="eyebrow dark">HISTORIAL</span>
+            <h2>INTERVENCIONES REGISTRADAS</h2>
+          </div>
+          <button class="btn btn-secondary small-btn" id="exportBtn" type="button">Exportar CSV</button>
+        </div>
+
+        <div class="filters">
+          <div class="field">
+            <label for="filterMonth">Mes</label>
+            <input type="month" id="filterMonth">
+          </div>
+
+          <div class="field">
+            <label for="filterType">Tipo</label>
+            <select id="filterType">
+              <option value="">Todos</option>
+              <option value="Rescate">Rescate</option>
+              <option value="Asistencia en agua">Asistencia en agua</option>
+              <option value="Asistencia fuera del agua">Asistencia fuera del agua</option>
+              <option value="Primeros auxilios">Primeros auxilios</option>
+              <option value="Rescate con semirrígido">Rescate con semirrígido</option>
+              <option value="Prevención">Prevención</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="filterPost">Puesto</label>
+            <input type="search" id="filterPost" placeholder="Buscar puesto">
+          </div>
+        </div>
+
+        <div class="history-list" id="historyList"></div>
+
+        <div class="empty-state" id="emptyState">
+          <strong>Todavía no hay registros.</strong>
+          <p>Cuando cargues una intervención va a aparecer acá.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div>
+        <strong>REGISTRO GUARDAVIDAS</strong>
+        <p>Herramienta para centralizar intervenciones y facilitar informes.</p>
+      </div>
+      <span>Monte Hermoso</span>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
