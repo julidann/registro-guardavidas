@@ -1,0 +1,9 @@
+{
+  "name": "Registro Guardavidas",
+  "short_name": "Guardavidas",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f7f8",
+  "theme_color": "#b3261e",
+  "description": "Registro de intervenciones para guardavidas de Monte Hermoso."
+}
