@@ -32,28 +32,41 @@
   </header>
 
   <main>
-    <section class="hero" id="inicio">
-      <div class="hero-container">
-        <div class="hero-copy">
-          <span class="eyebrow">MONTE HERMOSO · REGISTRO DE INTERVENCIONES</span>
-          <h1>REGISTRÁ CADA INTERVENCIÓN <span>EN EL MOMENTO.</span></h1>
-          <p>
-            Una herramienta simple para ordenar la información diaria y facilitar
-            los resúmenes de rescates, asistencias y primeros auxilios.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#registrar" class="btn btn-primary">+ Nueva intervención</a>
-            <a href="#historial" class="btn btn-secondary">Ver historial</a>
+    <section class="app-home" id="inicio">
+      <div class="section-container">
+        <div class="app-heading">
+          <div>
+            <span class="app-location">MONTE HERMOSO</span>
+            <h1>Registro de intervenciones</h1>
+            <p id="todayDate"></p>
           </div>
+          <span class="status-pill">En servicio</span>
         </div>
 
-        <div class="today-card">
-          <span class="today-label">HOY</span>
-          <strong id="todayTotal">0</strong>
-          <p>intervenciones registradas</p>
-          <div class="today-line"></div>
-          <small id="todayDate"></small>
+        <div class="app-actions">
+          <a href="#registrar" class="quick-action primary-action">
+            <span class="quick-icon">+</span>
+            <div>
+              <strong>Nueva intervención</strong>
+              <small>Cargar un registro</small>
+            </div>
+          </a>
+
+          <article class="today-card">
+            <div>
+              <span class="today-label">REGISTROS DE HOY</span>
+              <strong id="todayTotal">0</strong>
+            </div>
+            <small>intervenciones</small>
+          </article>
+
+          <a href="#historial" class="quick-action secondary-action">
+            <span class="quick-icon">≡</span>
+            <div>
+              <strong>Historial</strong>
+              <small>Ver registros anteriores</small>
+            </div>
+          </a>
         </div>
       </div>
     </section>
