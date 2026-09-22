@@ -2575,3 +2575,37 @@ body {
 .summary-section .stat-card {
   border-top-color: var(--yellow-dark);
 }
+
+
+/* Actividad de hoy: identidad azul/celeste */
+.today-panel {
+  border-left-color: var(--turquoise);
+  background: var(--turquoise-soft);
+}
+
+.today-panel .card-label {
+  color: var(--turquoise-dark);
+}
+
+.today-panel strong {
+  color: var(--navy);
+}
+
+.today-panel small {
+  color: var(--muted);
+}
+
+.today-action {
+  border-color: var(--turquoise-dark);
+  background: var(--turquoise);
+  color: #FFFFFF;
+}
+
+.today-action:hover {
+  background: var(--turquoise-dark);
+  color: #FFFFFF;
+}
+
+.today-action strong {
+  color: #FFFFFF;
+}
