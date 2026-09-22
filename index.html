@@ -44,7 +44,14 @@
       <div class="screen-top">
         <div>
           <span class="location-label">MONTE HERMOSO</span>
-          <h1 class="screen-title">Hoy</h1>
+          <div class="title-weather-row">
+            <h1 class="screen-title">Hoy</h1>
+            <div class="weather-chip" id="weatherChip" aria-label="Clima actual en Monte Hermoso">
+              <span class="weather-icon" id="weatherIcon" aria-hidden="true">☀️</span>
+              <strong class="weather-temp" id="weatherTemp">--°</strong>
+              <span class="weather-label" id="weatherLabel">Cargando...</span>
+            </div>
+          </div>
           <p class="screen-date" id="todayDate"></p>
         </div>
         <div class="post-chip">
