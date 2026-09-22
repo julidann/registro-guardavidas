@@ -48,8 +48,13 @@
             <h1 class="screen-title">Hoy</h1>
             <div class="weather-chip" id="weatherChip" aria-label="Clima actual en Monte Hermoso">
               <span class="weather-icon" id="weatherIcon" aria-hidden="true">☀️</span>
-              <strong class="weather-temp" id="weatherTemp">--°</strong>
-              <span class="weather-label" id="weatherLabel">Cargando...</span>
+              <div class="weather-copy">
+                <div class="weather-main">
+                  <strong class="weather-temp" id="weatherTemp">--°</strong>
+                  <span class="weather-label" id="weatherLabel">Cargando...</span>
+                </div>
+                <span class="weather-wind" id="weatherWind">Viento -- · -- km/h</span>
+              </div>
             </div>
           </div>
           <p class="screen-date" id="todayDate"></p>
