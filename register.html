@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#E95555">
+  <meta name="description" content="Nueva intervención de guardavidas.">
+  <title>Nueva intervención · Registro Guardavidas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+  <header class="app-header">
+    <div class="app-header-inner">
+      <a href="index.html" class="brand" aria-label="Registro Guardavidas - Inicio">
+        <span class="brand-icon" aria-hidden="true">+</span>
+        <span class="brand-copy">
+          <strong>REGISTRO</strong>
+          <small>GUARDAVIDAS</small>
+        </span>
+      </a>
+
+      <div class="header-status">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>En servicio</span>
+      </div>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <a href="index.html"><span class="nav-icon">⌂</span><span>Inicio</span></a>
+        <a href="register.html"><span class="nav-icon">＋</span><span>Registrar</span></a>
+        <a href="index.html#historial"><span class="nav-icon">≡</span><span>Historial</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="app-shell register-shell">
+    <section class="register-page" aria-labelledby="register-title">
+      <div class="register-page-head">
+        <a href="index.html" class="back-link">‹ Volver al inicio</a>
+        <span class="section-kicker">NUEVO REGISTRO</span>
+        <h1 id="register-title">Nueva intervención</h1>
+        <p>Completá los datos y guardá el registro. Al finalizar volvés automáticamente al inicio.</p>
+      </div>
+
+      <form class="intervention-form" id="interventionForm">
+        <div class="form-block">
+          <div class="form-block-title">
+            <span class="step-number">1</span>
+            <div>
+              <strong>Datos básicos</strong>
+              <small>Cuándo y dónde</small>
+            </div>
+          </div>
+
+          <div class="form-row two-columns">
+            <div class="field">
+              <label for="fecha">Fecha *</label>
+              <input type="date" id="fecha" name="fecha" required>
+            </div>
+
+            <div class="field">
+              <label for="hora">Hora *</label>
+              <input type="time" id="hora" name="hora" required>
+            </div>
+          </div>
+
+          <div class="form-row two-columns">
+            <div class="field">
+              <label for="puesto">Puesto *</label>
+              <select id="puesto" name="puesto" required>
+                <option value="">Seleccionar puesto</option>
+                <option value="Dientudo">1 - Dientudo</option>
+                <option value="Dunas">2 - Dunas</option>
+                <option value="Eslora">3 - Eslora</option>
+                <option value="Gaviotas">4 - Gaviotas</option>
+                <option value="Espigón">5 - Espigón</option>
+                <option value="Yate">6 - Yate</option>
+                <option value="Tamarisco">7 - Tamarisco</option>
+                <option value="Piedra Buena">8 - Piedra Buena</option>
+                <option value="Legh II">9 - Legh II</option>
+                <option value="Puesto Central">10 - Puesto Central</option>
+                <option value="Pelícano">11 - Pelícano</option>
+                <option value="Asolú">12 - Asolú</option>
+                <option value="Rambla">13 - Rambla</option>
+                <option value="Peatonal">14 - Peatonal</option>
+                <option value="Goleta">15 - Goleta</option>
+                <option value="Complejo">16 - Complejo</option>
+                <option value="Sorzales">17 - Sorzales</option>
+                <option value="Gavilán">18 - Gavilán</option>
+                <option value="Villa Caballero">19 - Villa Caballero</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="bandera">Bandera *</label>
+              <select id="bandera" name="bandera" required>
+                <option value="">Seleccionar bandera</option>
+                <option value="Mar bueno">Mar bueno</option>
+                <option value="Mar dudoso">Mar dudoso</option>
+                <option value="Mar peligroso">Mar peligroso</option>
+                <option value="Prohibido ingresar">Prohibido ingresar</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-block">
+          <div class="form-block-title">
+            <span class="step-number">2</span>
+            <div>
+              <strong>Intervención</strong>
+              <small>Qué ocurrió</small>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="tipo">Tipo de intervención *</label>
+            <select id="tipo" name="tipo" required>
+              <option value="">Seleccionar</option>
+              <option value="Rescate">Rescate</option>
+              <option value="Asistencia en agua">Asistencia en agua</option>
+              <option value="Asistencia fuera del agua">Asistencia fuera del agua</option>
+              <option value="Primeros auxilios">Primeros auxilios</option>
+              <option value="Rescate con semirrígido">Rescate con semirrígido</option>
+              <option value="Prevención">Prevención</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="form-row two-columns">
+            <div class="field">
+              <label for="personas">Personas involucradas</label>
+              <input type="number" id="personas" name="personas" min="1" value="1">
+            </div>
+
+            <div class="field">
+              <label for="lugar">Lugar *</label>
+              <input type="text" id="lugar" name="lugar" placeholder="Frente al puesto / sector" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-block">
+          <div class="form-block-title">
+            <span class="step-number">3</span>
+            <div>
+              <strong>Detalle</strong>
+              <small>Información de cierre</small>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="motivo">Motivo *</label>
+            <textarea id="motivo" name="motivo" rows="3" placeholder="¿Qué ocurrió?" required></textarea>
+          </div>
+
+          <div class="field">
+            <label for="resolucion">Resolución *</label>
+            <textarea id="resolucion" name="resolucion" rows="3" placeholder="¿Cómo finalizó la intervención?" required></textarea>
+          </div>
+
+          <div class="field field-last">
+            <label for="observaciones">Observaciones</label>
+            <textarea id="observaciones" name="observaciones" rows="3" placeholder="Información adicional (opcional)"></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary submit-btn">Registrar intervención</button>
+        <p class="form-message" id="formMessage" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <span>Registro Guardavidas · Monte Hermoso</span>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
