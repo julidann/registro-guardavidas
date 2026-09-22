@@ -2668,3 +2668,131 @@ body {
   background: #247F7F !important;
   border-color: #247F7F !important;
 }
+
+
+/* Ajuste mobile de Inicio */
+@media (max-width: 720px) {
+  .app-shell {
+    width: calc(100% - 20px);
+    padding-top: 16px;
+  }
+
+  .home-screen .screen-top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .home-screen .title-weather-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 10px;
+    align-items: center;
+  }
+
+  .home-screen .weather-chip {
+    width: 100%;
+    min-width: 0;
+    justify-content: flex-start;
+  }
+
+  .home-screen .weather-copy {
+    min-width: 0;
+  }
+
+  .home-screen .weather-main {
+    min-width: 0;
+  }
+
+  .home-screen .weather-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .home-screen .post-chip {
+    width: 100%;
+    min-width: 0;
+    padding: 9px 11px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    text-align: left;
+  }
+
+  .home-screen .post-chip strong {
+    margin-top: 0;
+    text-align: right;
+  }
+
+  .today-panel {
+    padding: 16px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .today-panel-copy {
+    width: 100%;
+  }
+
+  .today-panel .today-action {
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
+  }
+
+  .season-section,
+  .summary-section {
+    margin-top: 22px;
+  }
+
+  .season-section .section-bar,
+  .summary-section .section-bar {
+    align-items: flex-start;
+  }
+
+  .season-section .stats-grid,
+  .summary-section .stats-grid {
+    gap: 8px;
+  }
+
+  .season-section .stat-card,
+  .summary-section .stat-card {
+    min-height: 100px;
+    padding: 12px;
+  }
+
+  .season-section .stat-card-highlight,
+  .summary-section .stat-card-highlight {
+    min-height: 82px;
+    padding: 13px 14px;
+  }
+}
+
+@media (max-width: 390px) {
+  .app-shell {
+    width: calc(100% - 16px);
+  }
+
+  .home-screen .title-weather-row {
+    grid-template-columns: 1fr;
+  }
+
+  .home-screen .weather-chip {
+    max-width: none;
+  }
+
+  .home-screen .weather-label {
+    display: inline;
+    max-width: none;
+  }
+
+  .today-panel .today-action strong {
+    white-space: normal;
+    text-align: center;
+  }
+}
