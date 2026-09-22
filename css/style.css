@@ -2389,3 +2389,69 @@ body {
 .form-progress li.is-complete {
   color: var(--navy);
 }
+
+
+/* Identidad visual de la sección Registrar: amarillo de seguridad */
+.page-register .app-header {
+  border-bottom-color: var(--yellow);
+}
+
+.page-register .nav a[aria-current="page"] {
+  color: var(--navy);
+}
+
+.page-register .nav a[aria-current="page"]::after {
+  background: var(--yellow-dark);
+}
+
+.page-register .section-kicker,
+.page-register .step-label {
+  color: var(--yellow-dark);
+}
+
+.page-register .back-link {
+  color: var(--navy);
+}
+
+.page-register .form-progress-wrap {
+  border-top-color: var(--yellow-dark);
+}
+
+.page-register .form-step {
+  border-top-color: var(--yellow-dark);
+}
+
+.page-register .registration-summary {
+  border-left-color: var(--yellow-dark);
+  background: var(--yellow-soft);
+}
+
+.page-register .btn-primary {
+  border-color: var(--yellow-dark);
+  background: var(--yellow);
+  color: var(--navy);
+}
+
+.page-register .btn-primary:hover {
+  background: #E4B82F;
+  color: var(--navy);
+}
+
+.page-register .form-actions .form-back {
+  border-color: var(--border-strong);
+  background: #FFFFFF;
+  color: var(--navy);
+}
+
+.page-register .form-step.step-validated input:invalid,
+.page-register .form-step.step-validated select:invalid,
+.page-register .form-step.step-validated textarea:invalid {
+  border-color: var(--red);
+  background: #FFF8F8;
+}
+
+@media (max-width: 720px) {
+  .page-register .nav a[aria-current="page"]::after {
+    background: var(--yellow-dark);
+  }
+}
