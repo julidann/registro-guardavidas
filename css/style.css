@@ -2887,3 +2887,118 @@ body {
     background: var(--turquoise-dark);
   }
 }
+
+
+/* Historial simple: sin gráficos, pensado para lectura inmediata */
+.simple-activity-section {
+  margin-top: 26px;
+}
+
+.simple-ranking-card {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--turquoise-dark);
+  border-radius: 4px;
+  background: #FFFFFF;
+}
+
+.simple-ranking-row {
+  min-height: 68px;
+  padding: 12px 14px;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.simple-ranking-row:last-child {
+  border-bottom: 0;
+}
+
+.simple-ranking-position {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 3px;
+  background: var(--turquoise-soft);
+  color: var(--turquoise-dark);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.simple-ranking-name {
+  min-width: 0;
+}
+
+.simple-ranking-name small,
+.simple-ranking-name strong {
+  display: block;
+}
+
+.simple-ranking-name small {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.simple-ranking-name strong {
+  margin-top: 2px;
+  overflow: hidden;
+  color: var(--navy);
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.simple-ranking-values {
+  min-width: 92px;
+  text-align: right;
+}
+
+.simple-ranking-values strong,
+.simple-ranking-values span,
+.simple-ranking-values small {
+  display: block;
+}
+
+.simple-ranking-values strong {
+  color: var(--navy);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.simple-ranking-values span {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.simple-ranking-values small {
+  margin-top: 4px;
+  color: var(--turquoise-dark);
+  font-size: 8px;
+  font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  .history-page-title p {
+    max-width: 260px;
+  }
+
+  .simple-ranking-row {
+    min-height: 64px;
+    padding: 10px 11px;
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+    gap: 9px;
+  }
+
+  .simple-ranking-values {
+    min-width: 80px;
+  }
+
+  .simple-ranking-values strong {
+    font-size: 18px;
+  }
+}
