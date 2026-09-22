@@ -46,8 +46,8 @@
         <span class="section-kicker">ESTADÍSTICAS</span>
         <div class="history-page-title">
           <div>
-            <h1 id="history-title">Historial y análisis</h1>
-            <p>Una vista rápida de la actividad de la temporada.</p>
+            <h1 id="history-title">Historial</h1>
+            <p>Resumen simple de la actividad registrada.</p>
           </div>
           <button class="btn btn-secondary small-btn" id="exportBtn" type="button">Exportar CSV</button>
         </div>
@@ -73,45 +73,24 @@
         </article>
       </section>
 
-      <section class="analytics-grid" aria-label="Gráficos">
-        <article class="analytics-card rescue-chart-card">
-          <div class="analytics-card-head">
-            <div>
-              <span class="section-kicker">RESCATES</span>
-              <h2>Distribución por puesto</h2>
-            </div>
+      <section class="simple-activity-section" aria-labelledby="activity-title">
+        <div class="section-bar">
+          <div>
+            <span class="section-kicker">PUESTOS</span>
+            <h2 id="activity-title">Puestos con más actividad</h2>
+            <p class="section-helper">Los mostramos de mayor a menor para leerlos rápido.</p>
           </div>
+        </div>
 
-          <div class="donut-layout">
-            <div class="donut-chart" id="rescueDonut" aria-label="Distribución porcentual de rescates por puesto">
-              <div class="donut-center">
-                <strong id="rescueDonutTotal">0</strong>
-                <span>rescates</span>
-              </div>
-            </div>
-
-            <div class="donut-legend" id="rescueLegend"></div>
-          </div>
-        </article>
-
-        <article class="analytics-card">
-          <div class="analytics-card-head">
-            <div>
-              <span class="section-kicker">PUESTOS</span>
-              <h2>Mayor actividad</h2>
-            </div>
-          </div>
-
-          <div class="post-ranking" id="postRanking"></div>
-        </article>
+        <div class="simple-ranking-card" id="postRanking"></div>
       </section>
 
       <section class="posts-section" aria-labelledby="posts-title">
         <div class="section-bar posts-heading">
           <div>
             <span class="section-kicker">DETALLE POR PUESTO</span>
-            <h2 id="posts-title">Intervenciones por puesto</h2>
-            <p class="section-helper">Primero mostramos los puestos con mayor actividad.</p>
+            <h2 id="posts-title">Actividad por puesto</h2>
+            <p class="section-helper">Tocá un puesto para ver sus registros.</p>
           </div>
           <button type="button" class="btn btn-secondary small-btn" id="togglePostsBtn" aria-expanded="false">Ver todos</button>
         </div>
