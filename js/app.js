@@ -73,6 +73,110 @@ function normalize(text) {
   return String(text || "").trim().toLowerCase();
 }
 
+const WEATHER_CACHE_KEY = "registro_guardavidas_clima_monte_hermoso";
+
+function getWeatherInfo(code) {
+  if (code === 0) {
+    return { icon: "☀️", label: "Despejado" };
+  }
+
+  if (code === 1 || code === 2) {
+    return { icon: "⛅", label: "Parcialmente nublado" };
+  }
+
+  if (code === 3) {
+    return { icon: "☁️", label: "Nublado" };
+  }
+
+  if (code === 45 || code === 48) {
+    return { icon: "🌫️", label: "Niebla" };
+  }
+
+  if ([51, 53, 55, 56, 57, 80, 81, 82].includes(code)) {
+    return { icon: "🌦️", label: "Llovizna" };
+  }
+
+  if ([61, 63, 65, 66, 67].includes(code)) {
+    return { icon: "🌧️", label: "Lluvia" };
+  }
+
+  if ([71, 73, 75, 77, 85, 86].includes(code)) {
+    return { icon: "❄️", label: "Nieve" };
+  }
+
+  if ([95, 96, 99].includes(code)) {
+    return { icon: "⛈️", label: "Tormenta" };
+  }
+
+  return { icon: "🌤️", label: "Clima actual" };
+}
+
+function renderWeather(temperature, code) {
+  const info = getWeatherInfo(Number(code));
+  const weatherIcon = document.getElementById("weatherIcon");
+  const weatherTemp = document.getElementById("weatherTemp");
+  const weatherLabel = document.getElementById("weatherLabel");
+
+  weatherIcon.textContent = info.icon;
+  weatherTemp.textContent = Math.round(Number(temperature)) + "°";
+  weatherLabel.textContent = info.label;
+}
+
+function loadCachedWeather() {
+  const saved = localStorage.getItem(WEATHER_CACHE_KEY);
+
+  if (!saved) {
+    return false;
+  }
+
+  try {
+    const weather = JSON.parse(saved);
+    renderWeather(weather.temperature, weather.code);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+async function loadWeather() {
+  const url =
+    "https://api.open-meteo.com/v1/forecast" +
+    "?latitude=-38.98" +
+    "&longitude=-61.30" +
+    "&current=temperature_2m,weather_code" +
+    "&timezone=America%2FArgentina%2FBuenos_Aires";
+
+  const hasCachedWeather = loadCachedWeather();
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error("No se pudo obtener el clima");
+    }
+
+    const data = await response.json();
+
+    if (!data.current) {
+      throw new Error("Respuesta de clima incompleta");
+    }
+
+    const weather = {
+      temperature: data.current.temperature_2m,
+      code: data.current.weather_code
+    };
+
+    localStorage.setItem(WEATHER_CACHE_KEY, JSON.stringify(weather));
+    renderWeather(weather.temperature, weather.code);
+  } catch (error) {
+    if (!hasCachedWeather) {
+      document.getElementById("weatherIcon").textContent = "🌤️";
+      document.getElementById("weatherTemp").textContent = "--°";
+      document.getElementById("weatherLabel").textContent = "Sin conexión";
+    }
+  }
+}
+
 function updateToday() {
   const total = interventions.filter(function (item) {
     return item.fecha === getToday();
@@ -329,6 +433,7 @@ summaryMonth.value = getCurrentMonth();
 filterMonth.value = getCurrentMonth();
 setDefaultDateTime();
 updateAll();
+loadWeather();
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {
