@@ -2455,3 +2455,89 @@ body {
     background: var(--yellow-dark);
   }
 }
+
+
+/* Ayuda contextual y recuperación de errores */
+.task-help {
+  margin-top: 14px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--yellow-dark);
+  border-radius: 3px;
+  background: #FFFFFF;
+}
+
+.task-help summary {
+  min-height: 44px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--navy);
+  font-size: 11px;
+  font-weight: 700;
+  list-style: none;
+}
+
+.task-help summary::-webkit-details-marker {
+  display: none;
+}
+
+.task-help summary::after {
+  content: "+";
+  margin-left: auto;
+  color: var(--yellow-dark);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.task-help[open] summary::after {
+  content: "−";
+}
+
+.task-help-content {
+  padding: 0 12px 12px;
+  display: grid;
+  gap: 6px;
+  border-top: 1px solid var(--border);
+}
+
+.task-help-content p {
+  padding-top: 8px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.task-help-content strong {
+  color: var(--navy);
+}
+
+.required-note {
+  margin-top: 9px;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.required-note span {
+  color: var(--red-dark);
+  font-weight: 800;
+}
+
+.form-feedback:not(:empty) {
+  margin-top: 2px;
+  padding: 10px 12px;
+  border-left: 4px solid var(--red);
+  background: #FFF7F7;
+  color: #7C3035;
+}
+
+.field [aria-invalid="true"] {
+  border-color: var(--red) !important;
+  background: #FFF8F8 !important;
+}
+
+@media (max-width: 720px) {
+  .task-help summary {
+    min-height: 48px;
+  }
+}
