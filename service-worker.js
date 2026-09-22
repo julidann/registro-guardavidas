@@ -1,4 +1,4 @@
-const CACHE_NAME = "registro-guardavidas-v23";
+const CACHE_NAME = "registro-guardavidas-v24";
 const FILES_TO_CACHE = [
   "./",
   "./index.html",
