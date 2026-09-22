@@ -34,7 +34,7 @@
       <nav class="nav" id="nav" aria-label="Navegación principal">
         <a href="index.html"><span class="nav-icon">⌂</span><span>Inicio</span></a>
         <a href="register.html"><span class="nav-icon">＋</span><span>Registrar</span></a>
-        <a href="history.html"><span class="nav-icon">≡</span><span>Historial</span></a>
+        <a href="history.html" aria-current="page"><span class="nav-icon">≡</span><span>Historial</span></a>
       </nav>
     </div>
   </header>
@@ -107,11 +107,13 @@
       </section>
 
       <section class="posts-section" aria-labelledby="posts-title">
-        <div class="section-bar">
+        <div class="section-bar posts-heading">
           <div>
             <span class="section-kicker">DETALLE POR PUESTO</span>
             <h2 id="posts-title">Intervenciones por puesto</h2>
+            <p class="section-helper">Primero mostramos los puestos con mayor actividad.</p>
           </div>
+          <button type="button" class="btn btn-secondary small-btn" id="togglePostsBtn" aria-expanded="false">Ver todos</button>
         </div>
 
         <div class="post-cards-grid" id="postCards"></div>
@@ -122,6 +124,7 @@
           <div>
             <span class="section-kicker">REGISTROS</span>
             <h2 id="records-title">Ver intervenciones una por una</h2>
+            <p class="section-helper" id="recordsCount">0 registros</p>
           </div>
           <button class="btn btn-secondary small-btn" id="toggleRecordsBtn" type="button" aria-expanded="false">
             Ver registros
