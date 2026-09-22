@@ -3020,3 +3020,87 @@ body {
     width: 100%;
   }
 }
+
+
+/* Historial: integrar celeste, rojo y amarillo como el resto de la app */
+.page-history .history-overview-card:nth-child(1) {
+  border-top: 0;
+  border-left: 5px solid var(--turquoise);
+  background: var(--turquoise-soft);
+}
+
+.page-history .history-overview-card:nth-child(1) strong {
+  color: var(--turquoise-dark);
+}
+
+.page-history .history-overview-card:nth-child(2) {
+  border-top: 3px solid var(--red);
+  background: #FFF9F9;
+}
+
+.page-history .history-overview-card:nth-child(2) strong {
+  color: var(--red-dark);
+}
+
+.page-history .history-overview-card:nth-child(3) {
+  border-top: 3px solid var(--yellow-dark);
+  background: var(--yellow-soft);
+}
+
+.page-history .history-overview-card:nth-child(3) strong {
+  color: var(--navy);
+}
+
+/* Ranking simple: usar los tres acentos sin sumar complejidad */
+.page-history .simple-ranking-row:nth-child(3n + 1) .simple-ranking-position {
+  background: var(--turquoise-soft);
+  color: var(--turquoise-dark);
+}
+
+.page-history .simple-ranking-row:nth-child(3n + 2) .simple-ranking-position {
+  background: #FCEAEA;
+  color: var(--red-dark);
+}
+
+.page-history .simple-ranking-row:nth-child(3n) .simple-ranking-position {
+  background: var(--yellow-soft);
+  color: var(--navy);
+}
+
+/* Actividad por puesto: mismos acentos de la app */
+.page-history .post-stat-card:nth-child(3n + 1) {
+  border-top-color: var(--turquoise);
+}
+
+.page-history .post-stat-card:nth-child(3n + 2) {
+  border-top-color: var(--red);
+}
+
+.page-history .post-stat-card:nth-child(3n) {
+  border-top-color: var(--yellow-dark);
+}
+
+.page-history #exportBtn {
+  border-color: var(--yellow-dark);
+  background: var(--yellow-soft);
+  color: var(--navy);
+}
+
+.page-history #exportBtn:hover {
+  background: #FBEAA5;
+}
+
+.page-history #togglePostsBtn {
+  border-color: var(--turquoise-dark);
+  background: var(--turquoise-soft);
+}
+
+.page-history #toggleRecordsBtn {
+  border-color: var(--red-dark);
+  background: #FCEAEA;
+  color: var(--red-dark);
+}
+
+.page-history #toggleRecordsBtn:hover {
+  background: #F7DADA;
+}
