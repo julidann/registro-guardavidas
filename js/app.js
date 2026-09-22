@@ -1,6 +1,28 @@
 const STORAGE_KEY = "registro_guardavidas_intervenciones";
 const WEATHER_CACHE_KEY = "registro_guardavidas_clima_monte_hermoso";
 const DEMO_SEED_KEY = "registro_guardavidas_demo_v1";
+const POSTS = [
+  "Dientudo",
+  "Dunas",
+  "Eslora",
+  "Gaviotas",
+  "Espigón",
+  "Yate",
+  "Tamarisco",
+  "Piedra Buena",
+  "Legh II",
+  "Puesto Central",
+  "Pelícano",
+  "Asolú",
+  "Rambla",
+  "Peatonal",
+  "Goleta",
+  "Complejo",
+  "Sorzales",
+  "Gavilán",
+  "Villa Caballero"
+];
+
 
 function seedDemoInterventions() {
   if (localStorage.getItem(DEMO_SEED_KEY) === "ok") {
@@ -390,6 +412,182 @@ function updateMonthSummary() {
   setText("statSemirrigido", stats.semirrigido);
 }
 
+function getPostStats() {
+  return POSTS.map(function (post, index) {
+    const items = interventions.filter(function (item) {
+      return item.puesto === post;
+    });
+
+    const rescues = items.filter(function (item) {
+      return item.tipo === "Rescate";
+    }).length;
+
+    return {
+      number: index + 1,
+      post: post,
+      total: items.length,
+      rescues: rescues
+    };
+  });
+}
+
+function renderHistoryAnalytics() {
+  const totalElement = document.getElementById("historyTotal");
+
+  if (!totalElement) {
+    return;
+  }
+
+  const postStats = getPostStats();
+  const rescues = interventions.filter(function (item) {
+    return item.tipo === "Rescate";
+  });
+
+  setText("historyTotal", interventions.length);
+  setText("historyRescues", rescues.length);
+  setText(
+    "historyActivePosts",
+    postStats.filter(function (item) {
+      return item.total > 0;
+    }).length
+  );
+
+  renderRescueDonut(rescues);
+  renderPostRanking(postStats);
+  renderPostCards(postStats);
+}
+
+function renderRescueDonut(rescues) {
+  const donut = document.getElementById("rescueDonut");
+  const legend = document.getElementById("rescueLegend");
+
+  if (!donut || !legend) {
+    return;
+  }
+
+  const colors = ["#E95555", "#2BB1B1", "#29305A", "#F2C94C", "#9A373C", "#AEB7C8"];
+  const counts = {};
+
+  rescues.forEach(function (item) {
+    counts[item.puesto] = (counts[item.puesto] || 0) + 1;
+  });
+
+  const sorted = Object.keys(counts)
+    .map(function (post) {
+      return { post: post, count: counts[post] };
+    })
+    .sort(function (a, b) {
+      return b.count - a.count;
+    });
+
+  const top = sorted.slice(0, 5);
+  const otherCount = sorted.slice(5).reduce(function (sum, item) {
+    return sum + item.count;
+  }, 0);
+
+  if (otherCount > 0) {
+    top.push({ post: "Otros", count: otherCount });
+  }
+
+  setText("rescueDonutTotal", rescues.length);
+  legend.innerHTML = "";
+
+  if (rescues.length === 0) {
+    donut.style.background = "#ECEEF2";
+    legend.innerHTML = '<p class="analytics-empty">Todavía no hay rescates registrados.</p>';
+    return;
+  }
+
+  let current = 0;
+  const segments = [];
+
+  top.forEach(function (item, index) {
+    const start = current;
+    const percentage = (item.count / rescues.length) * 100;
+    current += percentage;
+
+    segments.push(
+      colors[index] + " " + start.toFixed(2) + "% " + current.toFixed(2) + "%"
+    );
+
+    const legendItem = document.createElement("div");
+    legendItem.className = "donut-legend-item";
+    legendItem.innerHTML =
+      '<span class="legend-dot" style="background:' + colors[index] + '"></span>' +
+      '<span class="legend-name">' + item.post + '</span>' +
+      '<strong>' + Math.round(percentage) + '%</strong>' +
+      '<small>' + item.count + '</small>';
+
+    legend.appendChild(legendItem);
+  });
+
+  donut.style.background = "conic-gradient(" + segments.join(", ") + ")";
+}
+
+function renderPostRanking(postStats) {
+  const container = document.getElementById("postRanking");
+
+  if (!container) {
+    return;
+  }
+
+  const topPosts = postStats
+    .filter(function (item) {
+      return item.total > 0;
+    })
+    .sort(function (a, b) {
+      return b.total - a.total;
+    })
+    .slice(0, 6);
+
+  container.innerHTML = "";
+
+  if (topPosts.length === 0) {
+    container.innerHTML = '<p class="analytics-empty">Todavía no hay actividad registrada.</p>';
+    return;
+  }
+
+  const max = topPosts[0].total || 1;
+
+  topPosts.forEach(function (item) {
+    const row = document.createElement("div");
+    row.className = "ranking-row";
+
+    row.innerHTML =
+      '<div class="ranking-label"><span>' + item.number + '. ' + item.post + '</span><strong>' + item.total + '</strong></div>' +
+      '<div class="ranking-track"><span style="width:' + ((item.total / max) * 100).toFixed(1) + '%"></span></div>';
+
+    container.appendChild(row);
+  });
+}
+
+function renderPostCards(postStats) {
+  const container = document.getElementById("postCards");
+
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = "";
+
+  postStats.forEach(function (item) {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "post-stat-card";
+    card.dataset.post = item.post;
+
+    card.innerHTML =
+      '<span class="post-number">Puesto ' + item.number + '</span>' +
+      '<strong class="post-name">' + item.post + '</strong>' +
+      '<div class="post-stat-values">' +
+        '<span><strong>' + item.total + '</strong><small>intervenciones</small></span>' +
+        '<span><strong>' + item.rescues + '</strong><small>rescates</small></span>' +
+      '</div>';
+
+    container.appendChild(card);
+  });
+}
+
 function getFilteredInterventions() {
   const month = filterMonth ? filterMonth.value : "";
   const type = filterType ? filterType.value : "";
@@ -569,6 +767,7 @@ function updateAll() {
   updateToday();
   updateSeasonSummary();
   updateMonthSummary();
+  renderHistoryAnalytics();
   renderHistory();
 }
 
@@ -600,6 +799,50 @@ if (filterType) {
 
 if (filterPost) {
   filterPost.addEventListener("change", renderHistory);
+}
+
+const toggleRecordsBtn = document.getElementById("toggleRecordsBtn");
+const recordsPanel = document.getElementById("recordsPanel");
+const postCards = document.getElementById("postCards");
+
+if (toggleRecordsBtn && recordsPanel) {
+  toggleRecordsBtn.addEventListener("click", function () {
+    const isHidden = recordsPanel.hasAttribute("hidden");
+
+    if (isHidden) {
+      recordsPanel.removeAttribute("hidden");
+      toggleRecordsBtn.textContent = "Ocultar registros";
+      toggleRecordsBtn.setAttribute("aria-expanded", "true");
+    } else {
+      recordsPanel.setAttribute("hidden", "");
+      toggleRecordsBtn.textContent = "Ver registros";
+      toggleRecordsBtn.setAttribute("aria-expanded", "false");
+    }
+  });
+}
+
+if (postCards && recordsPanel && filterPost) {
+  postCards.addEventListener("click", function (event) {
+    const card = event.target.closest(".post-stat-card");
+
+    if (!card) {
+      return;
+    }
+
+    filterPost.value = card.dataset.post;
+    recordsPanel.removeAttribute("hidden");
+
+    if (toggleRecordsBtn) {
+      toggleRecordsBtn.textContent = "Ocultar registros";
+      toggleRecordsBtn.setAttribute("aria-expanded", "true");
+    }
+
+    renderHistory();
+
+    setTimeout(function () {
+      recordsPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+  });
 }
 
 const exportBtn = document.getElementById("exportBtn");
