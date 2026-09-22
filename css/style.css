@@ -5,21 +5,21 @@
 }
 
 :root {
-  --red: #e44f4f;
-  --red-dark: #c93e3e;
-  --red-soft: #fff0ee;
-  --blue: #176d86;
-  --blue-soft: #e8f5f8;
-  --green: #258a73;
-  --green-soft: #e7f6f1;
+  --red: #E95555;
+  --red-dark: #9A373C;
+  --red-soft: #FCEAEA;
+  --blue: #29305A;
+  --blue-soft: #ECEEF6;
+  --green: #2BB1B1;
+  --green-soft: #E7F7F7;
   --white: #ffffff;
-  --background: #f5f2e9;
+  --background: #F7F7F5;
   --surface: #ffffff;
-  --text: #24343b;
-  --muted: #6f7f83;
-  --border: #d9e4e3;
-  --shadow: 0 8px 24px rgba(23, 109, 134, 0.10);
-  --shadow-soft: 0 4px 14px rgba(23, 109, 134, 0.07);
+  --text: #29305A;
+  --muted: #697080;
+  --border: #E2E3E8;
+  --shadow: 0 8px 24px rgba(41, 48, 90, 0.10);
+  --shadow-soft: 0 4px 14px rgba(41, 48, 90, 0.07);
   --radius-lg: 20px;
   --radius-md: 14px;
   --max-width: 980px;
@@ -89,7 +89,7 @@ textarea {
   display: grid;
   place-items: center;
   border-radius: 11px;
-  background: #25a7c4;
+  background: #E95555;
   color: var(--white);
   font-size: 24px;
   font-weight: 800;
@@ -103,7 +103,7 @@ textarea {
 }
 
 .brand-copy strong {
-  color: #1689a4;
+  color: #9A373C;
   font-size: 14px;
   letter-spacing: 0.08em;
 }
@@ -270,7 +270,7 @@ textarea {
   display: grid;
   place-items: center;
   border-radius: 13px;
-  background: #e8f8fb;
+  background: #FCEAEA;
   color: var(--red);
   font-size: 28px;
   font-weight: 800;
@@ -978,77 +978,96 @@ textarea {
   }
 }
 
-/* Identidad visual inspirada en Monte Hermoso */
+/* Identidad visual Puestos Guardavidas Monte Hermoso */
 :root {
-  --mh-celeste: #25a7c4;
-  --mh-celeste-dark: #1689a4;
-  --mh-azul: #176d86;
-  --mh-arena: #f5f2e9;
-  --mh-sol: #f2c94c;
+  --mh-red: #E95555;
+  --mh-red-dark: #9A373C;
+  --mh-turquoise: #2BB1B1;
+  --mh-navy: #29305A;
+  --mh-white: #FFFFFF;
 }
 
 .app-header {
-  border-bottom: 3px solid var(--mh-sol);
+  border-bottom: 3px solid var(--mh-red);
 }
 
 .brand-icon {
-  background: var(--mh-celeste);
+  background: var(--mh-red);
 }
 
 .brand-copy strong,
 .location-label,
 .section-kicker,
 .card-label {
-  color: var(--mh-celeste-dark);
+  color: var(--mh-red);
+}
+
+.header-status {
+  background: #E7F7F7;
+  color: #247F7F;
 }
 
 .action-card-primary {
-  border-color: rgba(37, 167, 196, 0.28);
+  border-color: rgba(233, 85, 85, 0.30);
 }
 
 .action-card-primary .action-icon {
-  background: #e8f8fb;
-  color: var(--mh-celeste-dark);
+  background: #FCEAEA;
+  color: var(--mh-red);
+}
+
+.action-icon-blue {
+  background: #E7F7F7;
+  color: var(--mh-turquoise);
 }
 
 .today-panel {
-  background: linear-gradient(135deg, var(--mh-azul), #0f5368);
+  background: linear-gradient(135deg, var(--mh-red), var(--mh-red-dark));
 }
 
 .round-action,
 .btn-primary {
-  background: var(--mh-celeste);
+  background: var(--mh-red);
 }
 
 .btn-primary:hover {
-  background: var(--mh-celeste-dark);
+  background: var(--mh-red-dark);
+}
+
+.stat-card-highlight {
+  border-color: rgba(233, 85, 85, 0.25);
+  background: linear-gradient(180deg, #FFFFFF, #FFF6F6);
 }
 
 .stat-card-highlight strong {
-  color: var(--mh-celeste-dark);
+  color: var(--mh-red);
 }
 
 .step-number {
-  background: #e8f8fb;
-  color: var(--mh-celeste-dark);
+  background: #FCEAEA;
+  color: var(--mh-red);
 }
 
 .nav a:active {
-  background: #e8f8fb;
-  color: var(--mh-celeste-dark);
+  background: #FCEAEA;
+  color: var(--mh-red);
 }
 
 .empty-link {
-  color: var(--mh-celeste-dark);
+  color: var(--mh-red);
 }
 
 .empty-icon {
-  background: #e8f8fb;
-  color: var(--mh-celeste-dark);
+  background: #FCEAEA;
+  color: var(--mh-red);
+}
+
+.history-card.boat {
+  border-left-color: var(--mh-turquoise);
 }
 
 @media (max-width: 720px) {
   .nav a:active {
-    background: #e8f8fb;
+    background: #FCEAEA;
   }
 }
