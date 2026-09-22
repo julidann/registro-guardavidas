@@ -1,5 +1,121 @@
 const STORAGE_KEY = "registro_guardavidas_intervenciones";
 const WEATHER_CACHE_KEY = "registro_guardavidas_clima_monte_hermoso";
+const DEMO_SEED_KEY = "registro_guardavidas_demo_v1";
+
+function seedDemoInterventions() {
+  if (localStorage.getItem(DEMO_SEED_KEY) === "ok") {
+    return;
+  }
+
+  const puestos = [
+    "Dientudo",
+    "Dunas",
+    "Eslora",
+    "Gaviotas",
+    "Espigón",
+    "Yate",
+    "Tamarisco",
+    "Piedra Buena",
+    "Legh II",
+    "Puesto Central",
+    "Pelícano",
+    "Asolú",
+    "Rambla",
+    "Peatonal",
+    "Goleta",
+    "Complejo",
+    "Sorzales",
+    "Gavilán",
+    "Villa Caballero"
+  ];
+
+  const tipos = [
+    "Rescate",
+    "Rescate",
+    "Rescate",
+    "Asistencia en agua",
+    "Asistencia fuera del agua",
+    "Primeros auxilios",
+    "Rescate con semirrígido",
+    "Prevención"
+  ];
+
+  const banderas = [
+    "Mar bueno",
+    "Mar dudoso",
+    "Mar peligroso",
+    "Prohibido ingresar"
+  ];
+
+  const motivos = [
+    "Bañista con dificultad para regresar a la costa",
+    "Persona arrastrada por la corriente",
+    "Menor separado de su familia dentro del agua",
+    "Calambre durante el ingreso al mar",
+    "Bañista agotado lejos de la orilla",
+    "Caída en zona de rompiente",
+    "Golpe contra banco de arena",
+    "Asistencia preventiva por oleaje fuerte",
+    "Persona desorientada dentro del agua",
+    "Ingreso fuera del sector recomendado",
+    "Bañista que no lograba hacer pie",
+    "Asistencia a persona con tabla inflable",
+    "Dos bañistas con dificultad simultánea",
+    "Intervención por corriente lateral",
+    "Persona con síntomas de hipotermia",
+    "Rescate preventivo ante cambio brusco del mar"
+  ];
+
+  const resoluciones = [
+    "Se asistió a la persona hasta la orilla sin complicaciones.",
+    "Se realizó rescate y control preventivo en el puesto.",
+    "Se acompañó al bañista hasta zona segura.",
+    "Se efectuó extracción rápida y evaluación primaria.",
+    "Se resolvió la situación sin necesidad de derivación.",
+    "Se solicitó apoyo del puesto lindero y se completó la asistencia.",
+    "Se utilizó elemento de rescate y se trasladó a la persona a la costa.",
+    "Se realizó prevención, contención y seguimiento durante algunos minutos."
+  ];
+
+  const now = new Date();
+  const demoItems = [];
+
+  for (let i = 0; i < 50; i += 1) {
+    const date = new Date(now);
+
+    // Reparte los registros entre hoy, el mes actual y los dos meses anteriores.
+    const daysAgo = i < 12 ? i % 8 : (i * 3) % 88;
+    date.setDate(now.getDate() - daysAgo);
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    const hour = 10 + (i % 9);
+    const minute = (i * 7) % 60;
+
+    demoItems.push({
+      id: Date.now() - (i + 1) * 1000,
+      fecha: year + "-" + month + "-" + day,
+      hora: String(hour).padStart(2, "0") + ":" + String(minute).padStart(2, "0"),
+      puesto: puestos[i % puestos.length],
+      bandera: banderas[(i + Math.floor(i / 5)) % banderas.length],
+      tipo: tipos[i % tipos.length],
+      personas: 1 + (i % 3),
+      lugar: "Sector de " + puestos[i % puestos.length],
+      motivo: motivos[i % motivos.length],
+      resolucion: resoluciones[i % resoluciones.length],
+      observaciones: "Registro demo para probar la interfaz."
+    });
+  }
+
+  const current = loadInterventions();
+  const merged = current.concat(demoItems);
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
+  localStorage.setItem(DEMO_SEED_KEY, "ok");
+}
+
 
 const form = document.getElementById("interventionForm");
 const historyList = document.getElementById("historyList");
@@ -13,6 +129,7 @@ const filterPost = document.getElementById("filterPost");
 const menuBtn = document.getElementById("menuBtn");
 const nav = document.getElementById("nav");
 
+seedDemoInterventions();
 let interventions = loadInterventions();
 
 function loadInterventions() {
