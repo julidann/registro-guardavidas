@@ -1741,3 +1741,264 @@ textarea {
     font-size: 38px;
   }
 }
+
+
+/* Rediseño UX/UI basado en heurísticas, Gestalt y Laws of UX */
+.nav a[aria-current="page"] {
+  background: var(--red-soft);
+  color: var(--red-dark);
+}
+
+.nav a,
+.btn,
+.primary-action,
+.delete-btn {
+  min-height: 44px;
+}
+
+.section-helper {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.optional {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 500;
+}
+
+.form-progress-wrap {
+  margin-bottom: 14px;
+  padding: 15px 16px 13px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.form-progress {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.form-progress li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.form-progress li > span {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.form-progress li.is-current {
+  color: var(--blue);
+}
+
+.form-progress li.is-current > span {
+  border-color: var(--red);
+  background: var(--red);
+  color: #fff;
+}
+
+.form-progress li.is-complete > span {
+  border-color: var(--green);
+  background: var(--green-soft);
+  color: #247f7f;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 13px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #ECEEF1;
+}
+
+.progress-track span {
+  width: 33.333%;
+  height: 100%;
+  display: block;
+  border-radius: inherit;
+  background: var(--red);
+  transition: width .2s ease;
+}
+
+.form-step {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.form-step[hidden] {
+  display: none;
+}
+
+.form-step-head {
+  margin-bottom: 18px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid var(--border);
+}
+
+.step-label {
+  color: var(--red);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.form-step-head h2 {
+  margin-top: 3px;
+  color: var(--blue);
+  font-size: 20px;
+}
+
+.form-step-head p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.form-actions {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: auto minmax(180px, 1fr);
+  gap: 10px;
+}
+
+.form-actions.one-action {
+  grid-template-columns: 1fr;
+}
+
+.registration-summary {
+  margin-bottom: 18px;
+  padding: 13px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #F8F9FA;
+}
+
+.registration-summary span,
+.registration-summary strong {
+  display: block;
+}
+
+.registration-summary span {
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.registration-summary strong {
+  margin-top: 2px;
+  color: var(--blue);
+  font-size: 11px;
+}
+
+.form-feedback {
+  min-height: 18px;
+  color: var(--red-dark);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.form-step.step-validated input:invalid,
+.form-step.step-validated select:invalid,
+.form-step.step-validated textarea:invalid {
+  border-color: var(--red);
+  background: #FFF8F8;
+}
+
+.posts-heading {
+  align-items: flex-end;
+}
+
+.post-stat-card.is-extra-post {
+  display: none;
+}
+
+.post-cards-grid.show-all .post-stat-card.is-extra-post {
+  display: flex;
+}
+
+.success-toast {
+  justify-content: flex-start;
+}
+
+.success-toast-copy {
+  flex: 1;
+}
+
+.toast-action {
+  min-height: 36px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--blue);
+  cursor: pointer;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+@media (max-width: 720px) {
+  .nav a {
+    min-height: 54px;
+  }
+
+  .form-progress-wrap {
+    padding: 12px 10px;
+  }
+
+  .form-progress li {
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+  }
+
+  .form-progress li small {
+    font-size: 8px;
+  }
+
+  .form-step {
+    padding: 16px;
+  }
+
+  .form-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .registration-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .posts-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .posts-heading .small-btn {
+    width: 100%;
+  }
+}
