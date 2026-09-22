@@ -2796,3 +2796,94 @@ body {
     text-align: center;
   }
 }
+
+
+/* Identidad visual del Historial: azul y celeste */
+.page-history .app-header {
+  border-bottom-color: var(--turquoise);
+}
+
+.page-history .nav a[aria-current="page"] {
+  color: var(--navy);
+}
+
+.page-history .nav a[aria-current="page"]::after {
+  background: var(--turquoise-dark);
+}
+
+.page-history .section-kicker {
+  color: var(--turquoise-dark);
+}
+
+.page-history .history-page-title h1,
+.page-history .analytics-card-head h2,
+.page-history .records-toggle-row h2,
+.page-history .section-bar h2 {
+  color: var(--navy);
+}
+
+.page-history .history-overview-card.primary {
+  border-left-color: var(--turquoise);
+  background: var(--turquoise-soft);
+}
+
+.page-history .history-overview-card.primary strong {
+  color: var(--turquoise-dark);
+}
+
+.page-history .history-overview-card:not(.primary),
+.page-history .analytics-card,
+.page-history .post-stat-card {
+  border-top-color: var(--navy);
+}
+
+.page-history .analytics-card {
+  background: #FFFFFF;
+}
+
+.page-history .ranking-track span {
+  background: linear-gradient(90deg, var(--turquoise), var(--turquoise-dark));
+}
+
+.page-history .post-number {
+  color: var(--turquoise-dark);
+}
+
+.page-history .post-stat-card:hover {
+  border-top-color: var(--turquoise);
+}
+
+.page-history .small-btn:not(.delete-btn),
+.page-history #exportBtn,
+.page-history #togglePostsBtn,
+.page-history #toggleRecordsBtn {
+  border-color: var(--turquoise-dark);
+  background: var(--turquoise-soft);
+  color: var(--navy);
+}
+
+.page-history .small-btn:not(.delete-btn):hover,
+.page-history #exportBtn:hover,
+.page-history #togglePostsBtn:hover,
+.page-history #toggleRecordsBtn:hover {
+  background: #D5F0F0;
+}
+
+.page-history .filters-card {
+  border-top: 3px solid var(--turquoise-dark);
+}
+
+.page-history .history-card {
+  border-left-color: var(--turquoise);
+}
+
+.page-history .history-type {
+  background: var(--turquoise-soft);
+  color: var(--turquoise-dark);
+}
+
+@media (max-width: 720px) {
+  .page-history .nav a[aria-current="page"]::after {
+    background: var(--turquoise-dark);
+  }
+}
