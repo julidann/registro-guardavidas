@@ -307,7 +307,7 @@ historyList.addEventListener("click", function (event) {
 summaryMonth.addEventListener("change", updateSummary);
 filterMonth.addEventListener("change", renderHistory);
 filterType.addEventListener("change", renderHistory);
-filterPost.addEventListener("input", renderHistory);
+filterPost.addEventListener("change", renderHistory);
 
 document.getElementById("exportBtn").addEventListener("click", exportCSV);
 
