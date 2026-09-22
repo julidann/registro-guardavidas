@@ -1,11 +1,11 @@
 const STORAGE_KEY = "registro_guardavidas_intervenciones";
+const WEATHER_CACHE_KEY = "registro_guardavidas_clima_monte_hermoso";
 
 const form = document.getElementById("interventionForm");
 const historyList = document.getElementById("historyList");
 const emptyState = document.getElementById("emptyState");
 const formMessage = document.getElementById("formMessage");
 
-const summaryMonth = document.getElementById("summaryMonth");
 const filterMonth = document.getElementById("filterMonth");
 const filterType = document.getElementById("filterType");
 const filterPost = document.getElementById("filterPost");
@@ -54,9 +54,23 @@ function getCurrentMonth() {
   return getToday().slice(0, 7);
 }
 
+function getCurrentMonthName() {
+  return new Intl.DateTimeFormat("es-AR", {
+    month: "long"
+  }).format(new Date());
+}
+
 function setDefaultDateTime() {
-  document.getElementById("fecha").value = getToday();
-  document.getElementById("hora").value = getCurrentTime();
+  const fecha = document.getElementById("fecha");
+  const hora = document.getElementById("hora");
+
+  if (fecha) {
+    fecha.value = getToday();
+  }
+
+  if (hora) {
+    hora.value = getCurrentTime();
+  }
 }
 
 function formatDate(date) {
@@ -73,40 +87,15 @@ function normalize(text) {
   return String(text || "").trim().toLowerCase();
 }
 
-const WEATHER_CACHE_KEY = "registro_guardavidas_clima_monte_hermoso";
-
 function getWeatherInfo(code) {
-  if (code === 0) {
-    return { icon: "☀️", label: "Despejado" };
-  }
-
-  if (code === 1 || code === 2) {
-    return { icon: "⛅", label: "Parcialmente nublado" };
-  }
-
-  if (code === 3) {
-    return { icon: "☁️", label: "Nublado" };
-  }
-
-  if (code === 45 || code === 48) {
-    return { icon: "🌫️", label: "Niebla" };
-  }
-
-  if ([51, 53, 55, 56, 57, 80, 81, 82].includes(code)) {
-    return { icon: "🌦️", label: "Llovizna" };
-  }
-
-  if ([61, 63, 65, 66, 67].includes(code)) {
-    return { icon: "🌧️", label: "Lluvia" };
-  }
-
-  if ([71, 73, 75, 77, 85, 86].includes(code)) {
-    return { icon: "❄️", label: "Nieve" };
-  }
-
-  if ([95, 96, 99].includes(code)) {
-    return { icon: "⛈️", label: "Tormenta" };
-  }
+  if (code === 0) return { icon: "☀️", label: "Despejado" };
+  if (code === 1 || code === 2) return { icon: "⛅", label: "Parcialmente nublado" };
+  if (code === 3) return { icon: "☁️", label: "Nublado" };
+  if (code === 45 || code === 48) return { icon: "🌫️", label: "Niebla" };
+  if ([51, 53, 55, 56, 57, 80, 81, 82].includes(code)) return { icon: "🌦️", label: "Llovizna" };
+  if ([61, 63, 65, 66, 67].includes(code)) return { icon: "🌧️", label: "Lluvia" };
+  if ([71, 73, 75, 77, 85, 86].includes(code)) return { icon: "❄️", label: "Nieve" };
+  if ([95, 96, 99].includes(code)) return { icon: "⛈️", label: "Tormenta" };
 
   return { icon: "🌤️", label: "Clima actual" };
 }
@@ -130,18 +119,22 @@ function getWindDirection(degrees) {
 }
 
 function renderWeather(temperature, code, windSpeed, windDirection) {
-  const info = getWeatherInfo(Number(code));
   const weatherIcon = document.getElementById("weatherIcon");
   const weatherTemp = document.getElementById("weatherTemp");
   const weatherLabel = document.getElementById("weatherLabel");
   const weatherWind = document.getElementById("weatherWind");
 
+  if (!weatherIcon || !weatherTemp || !weatherLabel || !weatherWind) {
+    return;
+  }
+
+  const info = getWeatherInfo(Number(code));
+  const direction = getWindDirection(windDirection);
+  const speed = Number.isFinite(Number(windSpeed)) ? Math.round(Number(windSpeed)) : "--";
+
   weatherIcon.textContent = info.icon;
   weatherTemp.textContent = Math.round(Number(temperature)) + "°";
   weatherLabel.textContent = info.label;
-
-  const direction = getWindDirection(windDirection);
-  const speed = Number.isFinite(Number(windSpeed)) ? Math.round(Number(windSpeed)) : "--";
   weatherWind.textContent = "Viento del " + direction + " · " + speed + " km/h";
 }
 
@@ -162,6 +155,10 @@ function loadCachedWeather() {
 }
 
 async function loadWeather() {
+  if (!document.getElementById("weatherChip")) {
+    return;
+  }
+
   const url =
     "https://api.open-meteo.com/v1/forecast" +
     "?latitude=-38.98" +
@@ -205,53 +202,81 @@ async function loadWeather() {
 }
 
 function updateToday() {
-  const total = interventions.filter(function (item) {
-    return item.fecha === getToday();
-  }).length;
+  const todayTotal = document.getElementById("todayTotal");
+  const todayDate = document.getElementById("todayDate");
 
-  document.getElementById("todayTotal").textContent = total;
+  if (todayTotal) {
+    const total = interventions.filter(function (item) {
+      return item.fecha === getToday();
+    }).length;
 
-  document.getElementById("todayDate").textContent = new Intl.DateTimeFormat("es-AR", {
-    weekday: "long",
-    day: "numeric",
-    month: "long"
-  }).format(new Date());
+    todayTotal.textContent = total;
+  }
+
+  if (todayDate) {
+    todayDate.textContent = new Intl.DateTimeFormat("es-AR", {
+      weekday: "long",
+      day: "numeric",
+      month: "long"
+    }).format(new Date());
+  }
 }
 
-function updateSummary() {
-  const selectedMonth = summaryMonth.value || getCurrentMonth();
+function getStats(items) {
+  return {
+    total: items.length,
+    rescates: items.filter(function (item) {
+      return item.tipo === "Rescate";
+    }).length,
+    asistencias: items.filter(function (item) {
+      return item.tipo === "Asistencia en agua" || item.tipo === "Asistencia fuera del agua";
+    }).length,
+    primerosAuxilios: items.filter(function (item) {
+      return item.tipo === "Primeros auxilios";
+    }).length,
+    semirrigido: items.filter(function (item) {
+      return item.tipo === "Rescate con semirrígido";
+    }).length
+  };
+}
 
+function setText(id, value) {
+  const element = document.getElementById(id);
+
+  if (element) {
+    element.textContent = value;
+  }
+}
+
+function updateSeasonSummary() {
+  const stats = getStats(interventions);
+
+  setText("seasonTotal", stats.total);
+  setText("seasonRescates", stats.rescates);
+  setText("seasonAsistencias", stats.asistencias);
+  setText("seasonPrimerosAuxilios", stats.primerosAuxilios);
+  setText("seasonSemirrigido", stats.semirrigido);
+}
+
+function updateMonthSummary() {
+  const currentMonth = getCurrentMonth();
   const monthItems = interventions.filter(function (item) {
-    return item.fecha.startsWith(selectedMonth);
+    return item.fecha.startsWith(currentMonth);
   });
+  const stats = getStats(monthItems);
 
-  const rescates = monthItems.filter(function (item) {
-    return item.tipo === "Rescate";
-  }).length;
-
-  const asistencias = monthItems.filter(function (item) {
-    return item.tipo === "Asistencia en agua" || item.tipo === "Asistencia fuera del agua";
-  }).length;
-
-  const primerosAuxilios = monthItems.filter(function (item) {
-    return item.tipo === "Primeros auxilios";
-  }).length;
-
-  const semirrigido = monthItems.filter(function (item) {
-    return item.tipo === "Rescate con semirrígido";
-  }).length;
-
-  document.getElementById("statTotal").textContent = monthItems.length;
-  document.getElementById("statRescates").textContent = rescates;
-  document.getElementById("statAsistencias").textContent = asistencias;
-  document.getElementById("statPrimerosAuxilios").textContent = primerosAuxilios;
-  document.getElementById("statSemirrigido").textContent = semirrigido;
+  setText("currentMonthLabel", getCurrentMonthName());
+  setText("statTotal", stats.total);
+  setText("statRescates", stats.rescates);
+  setText("statAsistencias", stats.asistencias);
+  setText("statPrimerosAuxilios", stats.primerosAuxilios);
+  setText("statSemirrigido", stats.semirrigido);
 }
 
 function getFilteredInterventions() {
-  const month = filterMonth.value;
-  const type = filterType.value;
-  const post = normalize(filterPost.value);
+  const month = filterMonth ? filterMonth.value : "";
+  const type = filterType ? filterType.value : "";
+  const post = filterPost ? normalize(filterPost.value) : "";
 
   return interventions
     .filter(function (item) {
@@ -270,18 +295,17 @@ function getFilteredInterventions() {
 }
 
 function getCardClass(type) {
-  if (type === "Rescate") {
-    return "rescue";
-  }
-
-  if (type === "Rescate con semirrígido") {
-    return "boat";
-  }
+  if (type === "Rescate") return "rescue";
+  if (type === "Rescate con semirrígido") return "boat";
 
   return "";
 }
 
 function renderHistory() {
+  if (!historyList || !emptyState) {
+    return;
+  }
+
   const items = getFilteredInterventions();
 
   historyList.innerHTML = "";
@@ -335,16 +359,7 @@ function addIntervention(event) {
   interventions.push(intervention);
   saveInterventions();
 
-  form.reset();
-  setDefaultDateTime();
-
-  formMessage.textContent = "Intervención registrada correctamente.";
-
-  setTimeout(function () {
-    formMessage.textContent = "";
-  }, 3000);
-
-  updateAll();
+  window.location.href = "index.html?registro=ok";
 }
 
 function deleteIntervention(id) {
@@ -410,57 +425,91 @@ function exportCSV() {
   const link = document.createElement("a");
 
   link.href = url;
-  link.download = "intervenciones-" + (filterMonth.value || "todas") + ".csv";
+  link.download = "intervenciones-" + ((filterMonth && filterMonth.value) || "todas") + ".csv";
   document.body.appendChild(link);
   link.click();
   link.remove();
   URL.revokeObjectURL(url);
 }
 
-function updateAll() {
-  updateToday();
-  updateSummary();
-  renderHistory();
-}
+function showSuccessToast() {
+  const params = new URLSearchParams(window.location.search);
+  const toast = document.getElementById("successToast");
 
-form.addEventListener("submit", addIntervention);
-
-historyList.addEventListener("click", function (event) {
-  const button = event.target.closest(".delete-btn");
-
-  if (!button) {
+  if (params.get("registro") !== "ok" || !toast) {
     return;
   }
 
-  deleteIntervention(Number(button.dataset.id));
-});
+  toast.classList.add("show");
+  window.history.replaceState({}, document.title, "index.html");
 
-summaryMonth.addEventListener("change", updateSummary);
-filterMonth.addEventListener("change", renderHistory);
-filterType.addEventListener("change", renderHistory);
-filterPost.addEventListener("change", renderHistory);
+  setTimeout(function () {
+    toast.classList.remove("show");
+  }, 3500);
+}
 
-document.getElementById("exportBtn").addEventListener("click", exportCSV);
+function updateAll() {
+  updateToday();
+  updateSeasonSummary();
+  updateMonthSummary();
+  renderHistory();
+}
 
-menuBtn.addEventListener("click", function () {
-  const isOpen = nav.classList.toggle("open");
-  menuBtn.setAttribute("aria-expanded", String(isOpen));
-  menuBtn.textContent = isOpen ? "×" : "☰";
-});
+if (form) {
+  setDefaultDateTime();
+  form.addEventListener("submit", addIntervention);
+}
 
-nav.querySelectorAll("a").forEach(function (link) {
-  link.addEventListener("click", function () {
-    nav.classList.remove("open");
-    menuBtn.setAttribute("aria-expanded", "false");
-    menuBtn.textContent = "☰";
+if (historyList) {
+  historyList.addEventListener("click", function (event) {
+    const button = event.target.closest(".delete-btn");
+
+    if (!button) {
+      return;
+    }
+
+    deleteIntervention(Number(button.dataset.id));
   });
-});
+}
 
-summaryMonth.value = getCurrentMonth();
-filterMonth.value = getCurrentMonth();
-setDefaultDateTime();
+if (filterMonth) {
+  filterMonth.value = getCurrentMonth();
+  filterMonth.addEventListener("change", renderHistory);
+}
+
+if (filterType) {
+  filterType.addEventListener("change", renderHistory);
+}
+
+if (filterPost) {
+  filterPost.addEventListener("change", renderHistory);
+}
+
+const exportBtn = document.getElementById("exportBtn");
+
+if (exportBtn) {
+  exportBtn.addEventListener("click", exportCSV);
+}
+
+if (menuBtn && nav) {
+  menuBtn.addEventListener("click", function () {
+    const isOpen = nav.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", String(isOpen));
+    menuBtn.textContent = isOpen ? "×" : "☰";
+  });
+
+  nav.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      nav.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
+      menuBtn.textContent = "☰";
+    });
+  });
+}
+
 updateAll();
 loadWeather();
+showSuccessToast();
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {
