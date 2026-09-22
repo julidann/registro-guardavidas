@@ -111,15 +111,38 @@ function getWeatherInfo(code) {
   return { icon: "🌤️", label: "Clima actual" };
 }
 
-function renderWeather(temperature, code) {
+function getWindDirection(degrees) {
+  const directions = [
+    "N", "NNE", "NE", "ENE",
+    "E", "ESE", "SE", "SSE",
+    "S", "SSO", "SO", "OSO",
+    "O", "ONO", "NO", "NNO"
+  ];
+
+  const value = Number(degrees);
+
+  if (!Number.isFinite(value)) {
+    return "--";
+  }
+
+  const index = Math.round((((value % 360) + 360) % 360) / 22.5) % 16;
+  return directions[index];
+}
+
+function renderWeather(temperature, code, windSpeed, windDirection) {
   const info = getWeatherInfo(Number(code));
   const weatherIcon = document.getElementById("weatherIcon");
   const weatherTemp = document.getElementById("weatherTemp");
   const weatherLabel = document.getElementById("weatherLabel");
+  const weatherWind = document.getElementById("weatherWind");
 
   weatherIcon.textContent = info.icon;
   weatherTemp.textContent = Math.round(Number(temperature)) + "°";
   weatherLabel.textContent = info.label;
+
+  const direction = getWindDirection(windDirection);
+  const speed = Number.isFinite(Number(windSpeed)) ? Math.round(Number(windSpeed)) : "--";
+  weatherWind.textContent = "Viento del " + direction + " · " + speed + " km/h";
 }
 
 function loadCachedWeather() {
@@ -131,7 +154,7 @@ function loadCachedWeather() {
 
   try {
     const weather = JSON.parse(saved);
-    renderWeather(weather.temperature, weather.code);
+    renderWeather(weather.temperature, weather.code, weather.windSpeed, weather.windDirection);
     return true;
   } catch (error) {
     return false;
@@ -143,7 +166,8 @@ async function loadWeather() {
     "https://api.open-meteo.com/v1/forecast" +
     "?latitude=-38.98" +
     "&longitude=-61.30" +
-    "&current=temperature_2m,weather_code" +
+    "&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m" +
+    "&wind_speed_unit=kmh" +
     "&timezone=America%2FArgentina%2FBuenos_Aires";
 
   const hasCachedWeather = loadCachedWeather();
@@ -163,16 +187,19 @@ async function loadWeather() {
 
     const weather = {
       temperature: data.current.temperature_2m,
-      code: data.current.weather_code
+      code: data.current.weather_code,
+      windSpeed: data.current.wind_speed_10m,
+      windDirection: data.current.wind_direction_10m
     };
 
     localStorage.setItem(WEATHER_CACHE_KEY, JSON.stringify(weather));
-    renderWeather(weather.temperature, weather.code);
+    renderWeather(weather.temperature, weather.code, weather.windSpeed, weather.windDirection);
   } catch (error) {
     if (!hasCachedWeather) {
       document.getElementById("weatherIcon").textContent = "🌤️";
       document.getElementById("weatherTemp").textContent = "--°";
       document.getElementById("weatherLabel").textContent = "Sin conexión";
+      document.getElementById("weatherWind").textContent = "Viento -- · -- km/h";
     }
   }
 }
