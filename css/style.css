@@ -1181,3 +1181,89 @@ textarea {
     background: #FCEAEA;
   }
 }
+
+/* Pantalla de registro separada y confirmación */
+.register-shell {
+  max-width: 760px;
+}
+
+.register-page-head {
+  margin-bottom: 20px;
+}
+
+.register-page-head h1 {
+  margin-top: 4px;
+  color: var(--blue);
+  font-size: clamp(28px, 5vw, 40px);
+  line-height: 1.05;
+}
+
+.register-page-head p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.back-link {
+  margin-bottom: 18px;
+  display: inline-flex;
+  color: var(--red);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.season-section {
+  margin-top: 34px;
+}
+
+.success-toast {
+  position: fixed;
+  z-index: 500;
+  left: 50%;
+  bottom: 28px;
+  min-width: min(420px, calc(100% - 32px));
+  padding: 13px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border-radius: 14px;
+  background: #247f7f;
+  color: #ffffff;
+  box-shadow: 0 12px 30px rgba(41, 48, 90, 0.18);
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 18px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.success-toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.success-toast-icon {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 13px;
+}
+
+@media (max-width: 720px) {
+  .success-toast {
+    bottom: calc(82px + env(safe-area-inset-bottom));
+  }
+
+  .register-shell {
+    padding-top: 18px;
+  }
+
+  .register-page-head p {
+    font-size: 12px;
+  }
+}
