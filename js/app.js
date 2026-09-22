@@ -453,7 +453,6 @@ function renderHistoryAnalytics() {
     }).length
   );
 
-  renderRescueDonut(rescues);
   renderPostRanking(postStats);
   renderPostCards(postStats);
 }
@@ -537,9 +536,9 @@ function renderPostRanking(postStats) {
       return item.total > 0;
     })
     .sort(function (a, b) {
-      return b.total - a.total;
+      return b.total - a.total || a.number - b.number;
     })
-    .slice(0, 6);
+    .slice(0, 5);
 
   container.innerHTML = "";
 
@@ -548,15 +547,21 @@ function renderPostRanking(postStats) {
     return;
   }
 
-  const max = topPosts[0].total || 1;
-
-  topPosts.forEach(function (item) {
+  topPosts.forEach(function (item, index) {
     const row = document.createElement("div");
-    row.className = "ranking-row";
+    row.className = "simple-ranking-row";
 
     row.innerHTML =
-      '<div class="ranking-label"><span>' + item.number + '. ' + item.post + '</span><strong>' + item.total + '</strong></div>' +
-      '<div class="ranking-track"><span style="width:' + ((item.total / max) * 100).toFixed(1) + '%"></span></div>';
+      '<span class="simple-ranking-position">' + (index + 1) + '</span>' +
+      '<div class="simple-ranking-name">' +
+        '<small>Puesto ' + item.number + '</small>' +
+        '<strong>' + item.post + '</strong>' +
+      '</div>' +
+      '<div class="simple-ranking-values">' +
+        '<strong>' + item.total + '</strong>' +
+        '<span>intervenciones</span>' +
+        '<small>' + item.rescues + ' rescates</small>' +
+      '</div>';
 
     container.appendChild(row);
   });
@@ -1028,6 +1033,11 @@ if (postCards && recordsPanel && filterPost) {
     }
 
     filterPost.value = card.dataset.post;
+
+    if (filterMonth) {
+      filterMonth.value = "";
+    }
+
     recordsPanel.removeAttribute("hidden");
 
     if (toggleRecordsBtn) {
