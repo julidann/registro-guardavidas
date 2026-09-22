@@ -1,6 +1,7 @@
 const STORAGE_KEY = "registro_guardavidas_intervenciones";
 const WEATHER_CACHE_KEY = "registro_guardavidas_clima_monte_hermoso";
 const DEMO_SEED_KEY = "registro_guardavidas_demo_v1";
+const LAST_CREATED_KEY = "registro_guardavidas_ultimo_registro";
 const POSTS = [
   "Dientudo",
   "Dunas",
@@ -568,12 +569,16 @@ function renderPostCards(postStats) {
     return;
   }
 
+  const ordered = postStats.slice().sort(function (a, b) {
+    return b.total - a.total || a.number - b.number;
+  });
+
   container.innerHTML = "";
 
-  postStats.forEach(function (item) {
+  ordered.forEach(function (item, index) {
     const card = document.createElement("button");
     card.type = "button";
-    card.className = "post-stat-card";
+    card.className = "post-stat-card" + (index >= 6 ? " is-extra-post" : "");
     card.dataset.post = item.post;
 
     card.innerHTML =
@@ -626,6 +631,11 @@ function renderHistory() {
   historyList.innerHTML = "";
   emptyState.style.display = items.length === 0 ? "block" : "none";
 
+  const recordsCount = document.getElementById("recordsCount");
+  if (recordsCount) {
+    recordsCount.textContent = items.length + (items.length === 1 ? " registro" : " registros");
+  }
+
   items.forEach(function (item) {
     const card = document.createElement("article");
     card.className = "history-card " + getCardClass(item.tipo);
@@ -673,6 +683,7 @@ function addIntervention(event) {
 
   interventions.push(intervention);
   saveInterventions();
+  sessionStorage.setItem(LAST_CREATED_KEY, String(intervention.id));
 
   window.location.href = "index.html?registro=ok";
 }
@@ -750,6 +761,7 @@ function exportCSV() {
 function showSuccessToast() {
   const params = new URLSearchParams(window.location.search);
   const toast = document.getElementById("successToast");
+  const undoButton = document.getElementById("undoRegistrationBtn");
 
   if (params.get("registro") !== "ok" || !toast) {
     return;
@@ -758,9 +770,26 @@ function showSuccessToast() {
   toast.classList.add("show");
   window.history.replaceState({}, document.title, "index.html");
 
+  if (undoButton) {
+    undoButton.onclick = function () {
+      const lastId = Number(sessionStorage.getItem(LAST_CREATED_KEY));
+
+      if (lastId) {
+        interventions = interventions.filter(function (item) {
+          return item.id !== lastId;
+        });
+        saveInterventions();
+        sessionStorage.removeItem(LAST_CREATED_KEY);
+        updateAll();
+      }
+
+      toast.classList.remove("show");
+    };
+  }
+
   setTimeout(function () {
     toast.classList.remove("show");
-  }, 3500);
+  }, 5000);
 }
 
 function updateAll() {
@@ -773,7 +802,110 @@ function updateAll() {
 
 if (form) {
   setDefaultDateTime();
-  form.addEventListener("submit", addIntervention);
+
+  const formSteps = Array.from(form.querySelectorAll("[data-form-step]"));
+  const progressSteps = Array.from(document.querySelectorAll("[data-progress-step]"));
+  const progressFill = document.getElementById("progressFill");
+  const feedback = document.getElementById("stepFeedback");
+  let currentFormStep = 0;
+
+  function updateRegistrationSummary() {
+    const date = document.getElementById("fecha");
+    const time = document.getElementById("hora");
+    const post = document.getElementById("puesto");
+    const flag = document.getElementById("bandera");
+    const type = document.getElementById("tipo");
+
+    const dateTime = document.getElementById("summaryDateTime");
+    const summaryPost = document.getElementById("summaryPost");
+    const summaryFlag = document.getElementById("summaryFlag");
+    const summaryType = document.getElementById("summaryType");
+
+    if (dateTime) dateTime.textContent = (date && date.value ? formatDate(date.value) : "—") + (time && time.value ? " · " + time.value + " hs" : "");
+    if (summaryPost) summaryPost.textContent = post && post.value ? post.options[post.selectedIndex].text : "—";
+    if (summaryFlag) summaryFlag.textContent = flag && flag.value ? flag.value : "—";
+    if (summaryType) summaryType.textContent = type && type.value ? type.value : "—";
+  }
+
+  function showFormStep(index) {
+    currentFormStep = index;
+
+    formSteps.forEach(function (step, stepIndex) {
+      step.hidden = stepIndex !== index;
+      step.classList.remove("step-validated");
+    });
+
+    progressSteps.forEach(function (step, stepIndex) {
+      step.classList.toggle("is-current", stepIndex === index);
+      step.classList.toggle("is-complete", stepIndex < index);
+
+      if (stepIndex === index) {
+        step.setAttribute("aria-current", "step");
+      } else {
+        step.removeAttribute("aria-current");
+      }
+    });
+
+    if (progressFill) {
+      progressFill.style.width = ((index + 1) / formSteps.length * 100) + "%";
+    }
+
+    if (feedback) {
+      feedback.textContent = "";
+    }
+
+    updateRegistrationSummary();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function validateStep(step) {
+    const requiredFields = Array.from(step.querySelectorAll("[required]"));
+    const invalid = requiredFields.find(function (field) {
+      return !field.checkValidity();
+    });
+
+    step.classList.add("step-validated");
+
+    if (invalid) {
+      if (feedback) {
+        feedback.textContent = "Revisá los campos marcados antes de continuar.";
+      }
+      invalid.focus();
+      return false;
+    }
+
+    return true;
+  }
+
+  form.addEventListener("click", function (event) {
+    const next = event.target.closest(".form-next");
+    const back = event.target.closest(".form-back");
+
+    if (next) {
+      const currentStep = formSteps[currentFormStep];
+
+      if (validateStep(currentStep)) {
+        showFormStep(Math.min(currentFormStep + 1, formSteps.length - 1));
+      }
+    }
+
+    if (back) {
+      showFormStep(Math.max(currentFormStep - 1, 0));
+    }
+  });
+
+  form.addEventListener("submit", function (event) {
+    const currentStep = formSteps[currentFormStep];
+
+    if (!validateStep(currentStep)) {
+      event.preventDefault();
+      return;
+    }
+
+    addIntervention(event);
+  });
+
+  showFormStep(0);
 }
 
 if (historyList) {
@@ -799,6 +931,17 @@ if (filterType) {
 
 if (filterPost) {
   filterPost.addEventListener("change", renderHistory);
+}
+
+const togglePostsBtn = document.getElementById("togglePostsBtn");
+const postCardsGrid = document.getElementById("postCards");
+
+if (togglePostsBtn && postCardsGrid) {
+  togglePostsBtn.addEventListener("click", function () {
+    const showAll = postCardsGrid.classList.toggle("show-all");
+    togglePostsBtn.textContent = showAll ? "Ver menos" : "Ver todos";
+    togglePostsBtn.setAttribute("aria-expanded", String(showAll));
+  });
 }
 
 const toggleRecordsBtn = document.getElementById("toggleRecordsBtn");
