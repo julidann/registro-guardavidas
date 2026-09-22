@@ -2609,3 +2609,44 @@ body {
 .today-action strong {
   color: #FFFFFF;
 }
+
+
+/* Corrección botón Registrar de Actividad de hoy */
+.today-panel .today-action {
+  min-height: 50px;
+  padding: 0 16px;
+  flex: 0 0 auto;
+  border: 1px solid var(--turquoise-dark);
+  background: var(--turquoise-dark);
+  color: #FFFFFF;
+}
+
+.today-panel .today-action span {
+  color: #FFFFFF;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.today-panel .today-action strong {
+  color: #FFFFFF;
+  font-size: 11px !important;
+  line-height: 1.2;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.today-panel .today-action:hover {
+  background: #1E6B6B;
+  border-color: #1E6B6B;
+}
+
+@media (max-width: 720px) {
+  .today-panel .today-action {
+    width: 100%;
+  }
+
+  .today-panel .today-action strong {
+    font-size: 12px !important;
+  }
+}
