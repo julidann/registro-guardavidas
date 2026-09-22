@@ -2344,3 +2344,48 @@ body {
 .form-progress li.is-complete {
   color: #244A32;
 }
+
+
+/* Acento amarillo de seguridad */
+:root {
+  --yellow: #F2C94C;
+  --yellow-dark: #C99D12;
+  --yellow-soft: #FFF7D6;
+}
+
+.form-next {
+  border-color: var(--yellow-dark);
+  background: var(--yellow);
+  color: var(--navy);
+}
+
+.form-next:hover {
+  border-color: var(--yellow-dark);
+  background: #E4B82F;
+  color: var(--navy);
+}
+
+.form-next:focus-visible {
+  outline-color: rgba(242, 201, 76, 0.35);
+}
+
+.form-progress li.is-current > span {
+  border-color: var(--yellow-dark);
+  background: var(--yellow);
+  color: var(--navy);
+}
+
+.form-progress li.is-complete > span {
+  border-color: var(--yellow-dark);
+  background: var(--yellow-soft);
+  color: var(--navy);
+}
+
+.progress-track span {
+  background: var(--yellow);
+}
+
+.form-progress li.is-current,
+.form-progress li.is-complete {
+  color: var(--navy);
+}
