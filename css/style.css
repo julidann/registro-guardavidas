@@ -1684,3 +1684,60 @@ textarea {
     width: 100%;
   }
 }
+
+
+/* Resúmenes de temporada y mes: total destacado a todo lo ancho */
+.season-section .stats-grid,
+.summary-section .stats-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.season-section .stat-card-highlight,
+.summary-section .stat-card-highlight {
+  grid-column: 1 / -1;
+  min-height: 96px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: 18px;
+}
+
+.season-section .stat-card-highlight > span,
+.summary-section .stat-card-highlight > span {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: end;
+}
+
+.season-section .stat-card-highlight > small,
+.summary-section .stat-card-highlight > small {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
+}
+
+.season-section .stat-card-highlight > strong,
+.summary-section .stat-card-highlight > strong {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  font-size: 44px;
+}
+
+@media (max-width: 720px) {
+  .season-section .stats-grid,
+  .summary-section .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .season-section .stat-card-highlight,
+  .summary-section .stat-card-highlight {
+    min-height: 88px;
+    padding: 15px 16px;
+  }
+
+  .season-section .stat-card-highlight > strong,
+  .summary-section .stat-card-highlight > strong {
+    font-size: 38px;
+  }
+}
