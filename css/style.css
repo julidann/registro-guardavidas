@@ -2541,3 +2541,37 @@ body {
     min-height: 48px;
   }
 }
+
+
+/* Diferenciar visualmente temporada y mes */
+.season-section .section-kicker,
+.season-section .section-bar h2 {
+  color: var(--red-dark);
+}
+
+.season-section .stat-card-highlight {
+  border-left-color: var(--red);
+  background: #FFF9F9;
+}
+
+.season-section .stat-card-highlight strong {
+  color: var(--red-dark);
+}
+
+.summary-section .section-kicker,
+.summary-section .section-bar h2 {
+  color: var(--yellow-dark);
+}
+
+.summary-section .stat-card-highlight {
+  border-left-color: var(--yellow-dark);
+  background: var(--yellow-soft);
+}
+
+.summary-section .stat-card-highlight strong {
+  color: var(--navy);
+}
+
+.summary-section .stat-card {
+  border-top-color: var(--yellow-dark);
+}
