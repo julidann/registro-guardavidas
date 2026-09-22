@@ -3002,3 +3002,21 @@ body {
     font-size: 18px;
   }
 }
+
+
+/* Botón Ver todos debajo de Actividad por puesto */
+.posts-more-row {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.posts-more-row .small-btn {
+  min-width: 150px;
+}
+
+@media (max-width: 720px) {
+  .posts-more-row .small-btn {
+    width: 100%;
+  }
+}
