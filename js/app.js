@@ -858,24 +858,79 @@ if (form) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  function getFieldName(field) {
+    const label = form.querySelector('label[for="' + field.id + '"]');
+
+    if (!label) {
+      return "este campo";
+    }
+
+    return label.textContent.replace("*", "").replace("(opcional)", "").trim().toLowerCase();
+  }
+
   function validateStep(step) {
-    const requiredFields = Array.from(step.querySelectorAll("[required]"));
-    const invalid = requiredFields.find(function (field) {
+    const fields = Array.from(step.querySelectorAll("input, select, textarea"));
+    const invalid = fields.find(function (field) {
       return !field.checkValidity();
     });
 
     step.classList.add("step-validated");
 
+    fields.forEach(function (field) {
+      field.setAttribute("aria-invalid", String(!field.checkValidity()));
+    });
+
     if (invalid) {
+      const fieldName = getFieldName(invalid);
+
       if (feedback) {
-        feedback.textContent = "Revisá los campos marcados antes de continuar.";
+        if (invalid.validity.valueMissing) {
+          feedback.textContent = "Completá " + fieldName + " para continuar.";
+        } else if (invalid.validity.rangeUnderflow) {
+          feedback.textContent = "Revisá " + fieldName + ": el valor ingresado es demasiado bajo.";
+        } else {
+          feedback.textContent = "Revisá " + fieldName + " antes de continuar.";
+        }
       }
+
       invalid.focus();
       return false;
     }
 
+    if (feedback) {
+      feedback.textContent = "";
+    }
+
     return true;
   }
+
+  form.addEventListener("input", function (event) {
+    const field = event.target.closest("input, select, textarea");
+
+    if (!field) {
+      return;
+    }
+
+    field.removeAttribute("aria-invalid");
+
+    if (field.checkValidity() && feedback) {
+      feedback.textContent = "";
+    }
+  });
+
+  form.addEventListener("change", function (event) {
+    const field = event.target.closest("input, select, textarea");
+
+    if (!field) {
+      return;
+    }
+
+    field.removeAttribute("aria-invalid");
+
+    if (field.checkValidity() && feedback) {
+      feedback.textContent = "";
+    }
+  });
 
   form.addEventListener("click", function (event) {
     const next = event.target.closest(".form-next");
