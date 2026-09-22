@@ -2650,3 +2650,21 @@ body {
     font-size: 12px !important;
   }
 }
+
+
+/* Fix definitivo: botón celeste visible en Actividad de hoy */
+.today-panel .today-action {
+  background: #2BB1B1 !important;
+  border: 1px solid #247F7F !important;
+  color: #FFFFFF !important;
+}
+
+.today-panel .today-action span,
+.today-panel .today-action strong {
+  color: #FFFFFF !important;
+}
+
+.today-panel .today-action:hover {
+  background: #247F7F !important;
+  border-color: #247F7F !important;
+}
