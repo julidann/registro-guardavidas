@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#b3261e">
   <meta name="description" content="Registro de intervenciones de guardavidas.">
   <title>Registro Guardavidas</title>
@@ -11,127 +11,136 @@
 </head>
 
 <body>
-  <header class="header">
-    <div class="header-container">
+  <header class="app-header">
+    <div class="app-header-inner">
       <a href="#inicio" class="brand" aria-label="Registro Guardavidas - Inicio">
         <span class="brand-icon" aria-hidden="true">+</span>
-        <span>
+        <span class="brand-copy">
           <strong>REGISTRO</strong>
           <small>GUARDAVIDAS</small>
         </span>
       </a>
 
+      <div class="header-status">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>En servicio</span>
+      </div>
+
       <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
 
-      <nav class="nav" id="nav">
-        <a href="#inicio">Inicio</a>
-        <a href="#registrar">Registrar</a>
-        <a href="#historial">Historial</a>
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <a href="#inicio"><span class="nav-icon">⌂</span><span>Inicio</span></a>
+        <a href="#registrar"><span class="nav-icon">＋</span><span>Registrar</span></a>
+        <a href="#historial"><span class="nav-icon">≡</span><span>Historial</span></a>
       </nav>
     </div>
   </header>
 
-  <main>
-    <section class="app-home" id="inicio">
-      <div class="section-container">
-        <div class="app-heading">
-          <div>
-            <span class="app-location">MONTE HERMOSO</span>
-            <h1>Registro de intervenciones</h1>
-            <p id="todayDate"></p>
-          </div>
-          <span class="status-pill">En servicio</span>
+  <main class="app-shell">
+    <section class="home-screen" id="inicio">
+      <div class="screen-top">
+        <div>
+          <span class="location-label">MONTE HERMOSO</span>
+          <h1 class="screen-title">Hoy</h1>
+          <p class="screen-date" id="todayDate"></p>
         </div>
-
-        <div class="app-actions">
-          <a href="#registrar" class="quick-action primary-action">
-            <span class="quick-icon">+</span>
-            <div>
-              <strong>Nueva intervención</strong>
-              <small>Cargar un registro</small>
-            </div>
-          </a>
-
-          <article class="today-card">
-            <div>
-              <span class="today-label">REGISTROS DE HOY</span>
-              <strong id="todayTotal">0</strong>
-            </div>
-            <small>intervenciones</small>
-          </article>
-
-          <a href="#historial" class="quick-action secondary-action">
-            <span class="quick-icon">≡</span>
-            <div>
-              <strong>Historial</strong>
-              <small>Ver registros anteriores</small>
-            </div>
-          </a>
+        <div class="post-chip">
+          <span>Puesto</span>
+          <strong>Sin asignar</strong>
         </div>
+      </div>
+
+      <div class="action-grid">
+        <a href="#registrar" class="action-card action-card-primary">
+          <span class="action-icon">＋</span>
+          <span class="action-copy">
+            <strong>Nueva intervención</strong>
+            <small>Registrar ahora</small>
+          </span>
+          <span class="action-arrow">›</span>
+        </a>
+
+        <a href="#historial" class="action-card">
+          <span class="action-icon action-icon-blue">≡</span>
+          <span class="action-copy">
+            <strong>Historial</strong>
+            <small>Ver registros</small>
+          </span>
+          <span class="action-arrow">›</span>
+        </a>
+      </div>
+
+      <article class="today-panel">
+        <div class="today-panel-copy">
+          <span class="card-label">ACTIVIDAD DE HOY</span>
+          <strong id="todayTotal">0</strong>
+          <small>intervenciones registradas</small>
+        </div>
+        <a href="#registrar" class="round-action" aria-label="Registrar nueva intervención">＋</a>
+      </article>
+    </section>
+
+    <section class="app-section summary-section" aria-labelledby="summary-title">
+      <div class="section-bar">
+        <div>
+          <span class="section-kicker">ESTADÍSTICAS</span>
+          <h2 id="summary-title">Resumen del mes</h2>
+        </div>
+        <input type="month" id="summaryMonth" class="month-input" aria-label="Mes del resumen">
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card stat-card-highlight">
+          <span>Total</span>
+          <strong id="statTotal">0</strong>
+          <small>intervenciones</small>
+        </article>
+
+        <article class="stat-card">
+          <span>Rescates</span>
+          <strong id="statRescates">0</strong>
+          <small>registrados</small>
+        </article>
+
+        <article class="stat-card">
+          <span>Asistencias</span>
+          <strong id="statAsistencias">0</strong>
+          <small>en / fuera del agua</small>
+        </article>
+
+        <article class="stat-card">
+          <span>Primeros auxilios</span>
+          <strong id="statPrimerosAuxilios">0</strong>
+          <small>atenciones</small>
+        </article>
+
+        <article class="stat-card">
+          <span>Semirrígido</span>
+          <strong id="statSemirrigido">0</strong>
+          <small>intervenciones</small>
+        </article>
       </div>
     </section>
 
-    <section class="summary-section">
-      <div class="section-container">
-        <div class="section-heading">
-          <div>
-            <span class="eyebrow dark">RESUMEN DEL MES</span>
-            <h2>DATOS RÁPIDOS</h2>
-          </div>
-          <input type="month" id="summaryMonth" class="month-input" aria-label="Mes del resumen">
+    <section class="app-section form-section" id="registrar" aria-labelledby="register-title">
+      <div class="section-bar">
+        <div>
+          <span class="section-kicker">NUEVO REGISTRO</span>
+          <h2 id="register-title">Nueva intervención</h2>
         </div>
-
-        <div class="stats-grid">
-          <article class="stat-card total">
-            <span>Total</span>
-            <strong id="statTotal">0</strong>
-            <small>intervenciones</small>
-          </article>
-
-          <article class="stat-card">
-            <span>Rescates</span>
-            <strong id="statRescates">0</strong>
-            <small>registrados</small>
-          </article>
-
-          <article class="stat-card">
-            <span>Asistencias</span>
-            <strong id="statAsistencias">0</strong>
-            <small>en y fuera del agua</small>
-          </article>
-
-          <article class="stat-card">
-            <span>Primeros auxilios</span>
-            <strong id="statPrimerosAuxilios">0</strong>
-            <small>atenciones</small>
-          </article>
-
-          <article class="stat-card">
-            <span>Semirrígido</span>
-            <strong id="statSemirrigido">0</strong>
-            <small>intervenciones</small>
-          </article>
-        </div>
+        <span class="section-note">Fecha y hora se completan solas</span>
       </div>
-    </section>
 
-    <section class="form-section" id="registrar">
-      <div class="section-container form-layout">
-        <div class="form-intro">
-          <span class="eyebrow dark">NUEVO REGISTRO</span>
-          <h2>CARGÁ LA INTERVENCIÓN</h2>
-          <p>
-            Completá sólo los datos necesarios. La idea es que pueda registrarse
-            desde el celular en pocos segundos.
-          </p>
-
-          <div class="form-tip">
-            <strong>Dato importante</strong>
-            <p>Fecha y hora se completan automáticamente, pero podés modificarlas.</p>
+      <form class="intervention-form" id="interventionForm">
+        <div class="form-block">
+          <div class="form-block-title">
+            <span class="step-number">1</span>
+            <div>
+              <strong>Datos básicos</strong>
+              <small>Cuándo y dónde</small>
+            </div>
           </div>
-        </div>
 
-        <form class="intervention-form" id="interventionForm">
           <div class="form-row two-columns">
             <div class="field">
               <label for="fecha">Fecha *</label>
@@ -162,6 +171,16 @@
               </select>
             </div>
           </div>
+        </div>
+
+        <div class="form-block">
+          <div class="form-block-title">
+            <span class="step-number">2</span>
+            <div>
+              <strong>Intervención</strong>
+              <small>Qué ocurrió</small>
+            </div>
+          </div>
 
           <div class="field">
             <label for="tipo">Tipo de intervención *</label>
@@ -185,7 +204,17 @@
 
             <div class="field">
               <label for="lugar">Lugar *</label>
-              <input type="text" id="lugar" name="lugar" placeholder="Ej: Frente al puesto / sector" required>
+              <input type="text" id="lugar" name="lugar" placeholder="Frente al puesto / sector" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-block">
+          <div class="form-block-title">
+            <span class="step-number">3</span>
+            <div>
+              <strong>Detalle</strong>
+              <small>Información de cierre</small>
             </div>
           </div>
 
@@ -199,27 +228,27 @@
             <textarea id="resolucion" name="resolucion" rows="3" placeholder="¿Cómo finalizó la intervención?" required></textarea>
           </div>
 
-          <div class="field">
+          <div class="field field-last">
             <label for="observaciones">Observaciones</label>
             <textarea id="observaciones" name="observaciones" rows="3" placeholder="Información adicional (opcional)"></textarea>
           </div>
-
-          <button type="submit" class="btn btn-primary submit-btn">Registrar intervención</button>
-          <p class="form-message" id="formMessage" role="status"></p>
-        </form>
-      </div>
-    </section>
-
-    <section class="history-section" id="historial">
-      <div class="section-container">
-        <div class="section-heading history-heading">
-          <div>
-            <span class="eyebrow dark">HISTORIAL</span>
-            <h2>INTERVENCIONES REGISTRADAS</h2>
-          </div>
-          <button class="btn btn-secondary small-btn" id="exportBtn" type="button">Exportar CSV</button>
         </div>
 
+        <button type="submit" class="btn btn-primary submit-btn">Registrar intervención</button>
+        <p class="form-message" id="formMessage" role="status"></p>
+      </form>
+    </section>
+
+    <section class="app-section history-section" id="historial" aria-labelledby="history-title">
+      <div class="section-bar history-bar">
+        <div>
+          <span class="section-kicker">REGISTROS</span>
+          <h2 id="history-title">Historial</h2>
+        </div>
+        <button class="btn btn-secondary small-btn" id="exportBtn" type="button">Exportar CSV</button>
+      </div>
+
+      <div class="filters-card">
         <div class="filters">
           <div class="field">
             <label for="filterMonth">Mes</label>
@@ -245,25 +274,21 @@
             <input type="search" id="filterPost" placeholder="Buscar puesto">
           </div>
         </div>
+      </div>
 
-        <div class="history-list" id="historyList"></div>
+      <div class="history-list" id="historyList"></div>
 
-        <div class="empty-state" id="emptyState">
-          <strong>Todavía no hay registros.</strong>
-          <p>Cuando cargues una intervención va a aparecer acá.</p>
-        </div>
+      <div class="empty-state" id="emptyState">
+        <span class="empty-icon">＋</span>
+        <strong>Todavía no hay registros</strong>
+        <p>Las intervenciones que cargues van a aparecer acá.</p>
+        <a href="#registrar" class="empty-link">Registrar intervención</a>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="footer-container">
-      <div>
-        <strong>REGISTRO GUARDAVIDAS</strong>
-        <p>Herramienta para centralizar intervenciones y facilitar informes.</p>
-      </div>
-      <span>Monte Hermoso</span>
-    </div>
+  <footer class="app-footer">
+    <span>Registro Guardavidas · Monte Hermoso</span>
   </footer>
 
   <script src="js/app.js"></script>
