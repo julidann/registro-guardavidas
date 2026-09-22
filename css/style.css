@@ -214,15 +214,27 @@ textarea {
 }
 
 .weather-chip {
-  min-height: 38px;
+  min-height: 44px;
   padding: 6px 10px;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   border: 1px solid var(--border);
   border-radius: 12px;
   background: var(--surface);
   box-shadow: var(--shadow-soft);
+}
+
+.weather-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .weather-icon {
@@ -242,6 +254,14 @@ textarea {
   font-size: 10px;
   font-weight: 600;
   line-height: 1.15;
+}
+
+.weather-wind {
+  color: var(--green);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1.1;
+  white-space: nowrap;
 }
 
 .screen-date {
@@ -879,9 +899,9 @@ textarea {
   }
 
   .weather-chip {
-    min-height: 34px;
+    min-height: 40px;
     padding: 5px 8px;
-    gap: 5px;
+    gap: 6px;
   }
 
   .weather-icon {
@@ -895,6 +915,10 @@ textarea {
   .weather-label {
     max-width: 92px;
     font-size: 9px;
+  }
+
+  .weather-wind {
+    font-size: 8px;
   }
 
   .post-chip {
@@ -1029,6 +1053,10 @@ textarea {
 
   .weather-label {
     display: none;
+  }
+
+  .weather-wind {
+    font-size: 8px;
   }
 
   .screen-top {
