@@ -33,7 +33,7 @@
 
       <nav class="nav" id="nav" aria-label="Navegación principal">
         <a href="index.html"><span class="nav-icon">⌂</span><span>Inicio</span></a>
-        <a href="register.html"><span class="nav-icon">＋</span><span>Registrar</span></a>
+        <a href="register.html" aria-current="page"><span class="nav-icon">＋</span><span>Registrar</span></a>
         <a href="history.html"><span class="nav-icon">≡</span><span>Historial</span></a>
       </nav>
     </div>
@@ -45,17 +45,30 @@
         <a href="index.html" class="back-link">‹ Volver al inicio</a>
         <span class="section-kicker">NUEVO REGISTRO</span>
         <h1 id="register-title">Nueva intervención</h1>
-        <p>Completá los datos y guardá el registro. Al finalizar volvés automáticamente al inicio.</p>
+        <p>Completá los 3 pasos. Al guardar, volvés automáticamente al inicio con la confirmación del registro.</p>
       </div>
 
-      <form class="intervention-form" id="interventionForm">
-        <div class="form-block">
-          <div class="form-block-title">
-            <span class="step-number">1</span>
-            <div>
-              <strong>Datos básicos</strong>
-              <small>Cuándo y dónde</small>
-            </div>
+      <div class="form-progress-wrap" aria-label="Progreso del registro">
+        <ol class="form-progress" id="formProgress">
+          <li class="is-current" data-progress-step="0" aria-current="step">
+            <span>1</span><small>Datos básicos</small>
+          </li>
+          <li data-progress-step="1">
+            <span>2</span><small>Intervención</small>
+          </li>
+          <li data-progress-step="2">
+            <span>3</span><small>Detalle</small>
+          </li>
+        </ol>
+        <div class="progress-track" aria-hidden="true"><span id="progressFill"></span></div>
+      </div>
+
+      <form class="intervention-form" id="interventionForm" novalidate>
+        <section class="form-step" data-form-step="0" aria-labelledby="step-1-title">
+          <div class="form-step-head">
+            <span class="step-label">Paso 1 de 3</span>
+            <h2 id="step-1-title">Datos básicos</h2>
+            <p>Cuándo ocurrió y en qué puesto.</p>
           </div>
 
           <div class="form-row two-columns">
@@ -63,66 +76,65 @@
               <label for="fecha">Fecha *</label>
               <input type="date" id="fecha" name="fecha" required>
             </div>
-
             <div class="field">
               <label for="hora">Hora *</label>
               <input type="time" id="hora" name="hora" required>
             </div>
           </div>
 
-          <div class="form-row two-columns">
-            <div class="field">
-              <label for="puesto">Puesto *</label>
-              <select id="puesto" name="puesto" required>
-                <option value="">Seleccionar puesto</option>
-                <option value="Dientudo">1 - Dientudo</option>
-                <option value="Dunas">2 - Dunas</option>
-                <option value="Eslora">3 - Eslora</option>
-                <option value="Gaviotas">4 - Gaviotas</option>
-                <option value="Espigón">5 - Espigón</option>
-                <option value="Yate">6 - Yate</option>
-                <option value="Tamarisco">7 - Tamarisco</option>
-                <option value="Piedra Buena">8 - Piedra Buena</option>
-                <option value="Legh II">9 - Legh II</option>
-                <option value="Puesto Central">10 - Puesto Central</option>
-                <option value="Pelícano">11 - Pelícano</option>
-                <option value="Asolú">12 - Asolú</option>
-                <option value="Rambla">13 - Rambla</option>
-                <option value="Peatonal">14 - Peatonal</option>
-                <option value="Goleta">15 - Goleta</option>
-                <option value="Complejo">16 - Complejo</option>
-                <option value="Sorzales">17 - Sorzales</option>
-                <option value="Gavilán">18 - Gavilán</option>
-                <option value="Villa Caballero">19 - Villa Caballero</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="bandera">Bandera *</label>
-              <select id="bandera" name="bandera" required>
-                <option value="">Seleccionar bandera</option>
-                <option value="Mar bueno">Mar bueno</option>
-                <option value="Mar dudoso">Mar dudoso</option>
-                <option value="Mar peligroso">Mar peligroso</option>
-                <option value="Prohibido ingresar">Prohibido ingresar</option>
-              </select>
-            </div>
+          <div class="field">
+            <label for="puesto">Puesto *</label>
+            <select id="puesto" name="puesto" required>
+              <option value="">Seleccionar puesto</option>
+              <option value="Dientudo">1 - Dientudo</option>
+              <option value="Dunas">2 - Dunas</option>
+              <option value="Eslora">3 - Eslora</option>
+              <option value="Gaviotas">4 - Gaviotas</option>
+              <option value="Espigón">5 - Espigón</option>
+              <option value="Yate">6 - Yate</option>
+              <option value="Tamarisco">7 - Tamarisco</option>
+              <option value="Piedra Buena">8 - Piedra Buena</option>
+              <option value="Legh II">9 - Legh II</option>
+              <option value="Puesto Central">10 - Puesto Central</option>
+              <option value="Pelícano">11 - Pelícano</option>
+              <option value="Asolú">12 - Asolú</option>
+              <option value="Rambla">13 - Rambla</option>
+              <option value="Peatonal">14 - Peatonal</option>
+              <option value="Goleta">15 - Goleta</option>
+              <option value="Complejo">16 - Complejo</option>
+              <option value="Sorzales">17 - Sorzales</option>
+              <option value="Gavilán">18 - Gavilán</option>
+              <option value="Villa Caballero">19 - Villa Caballero</option>
+            </select>
           </div>
-        </div>
 
-        <div class="form-block">
-          <div class="form-block-title">
-            <span class="step-number">2</span>
-            <div>
-              <strong>Intervención</strong>
-              <small>Qué ocurrió</small>
-            </div>
+          <div class="field">
+            <label for="bandera">Bandera *</label>
+            <select id="bandera" name="bandera" required>
+              <option value="">Seleccionar bandera</option>
+              <option value="Mar bueno">Mar bueno</option>
+              <option value="Mar dudoso">Mar dudoso</option>
+              <option value="Mar peligroso">Mar peligroso</option>
+              <option value="Prohibido ingresar">Prohibido ingresar</option>
+            </select>
+          </div>
+
+          <div class="form-actions one-action">
+            <button type="button" class="btn btn-primary form-next">Continuar</button>
+          </div>
+        </section>
+
+        <section class="form-step" data-form-step="1" aria-labelledby="step-2-title" hidden>
+          <div class="form-step-head">
+            <span class="step-label">Paso 2 de 3</span>
+            <h2 id="step-2-title">Intervención</h2>
+            <p>Qué pasó y en qué sector.</p>
           </div>
 
           <div class="field">
             <label for="tipo">Tipo de intervención *</label>
             <select id="tipo" name="tipo" required>
-              <option value="">Seleccionar</option>
+              <option value="">Seleccionar tipo</option>
               <option value="Rescate">Rescate</option>
               <option value="Asistencia en agua">Asistencia en agua</option>
               <option value="Asistencia fuera del agua">Asistencia fuera del agua</option>
@@ -136,24 +148,33 @@
           <div class="form-row two-columns">
             <div class="field">
               <label for="personas">Personas involucradas</label>
-              <input type="number" id="personas" name="personas" min="1" value="1">
+              <input type="number" id="personas" name="personas" min="1" value="1" inputmode="numeric">
             </div>
-
             <div class="field">
               <label for="lugar">Lugar *</label>
-              <input type="text" id="lugar" name="lugar" placeholder="Frente al puesto / sector" required>
+              <input type="text" id="lugar" name="lugar" placeholder="Ej. frente al puesto" required>
             </div>
           </div>
-        </div>
 
-        <div class="form-block">
-          <div class="form-block-title">
-            <span class="step-number">3</span>
-            <div>
-              <strong>Detalle</strong>
-              <small>Información de cierre</small>
-            </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary form-back">Atrás</button>
+            <button type="button" class="btn btn-primary form-next">Continuar</button>
           </div>
+        </section>
+
+        <section class="form-step" data-form-step="2" aria-labelledby="step-3-title" hidden>
+          <div class="form-step-head">
+            <span class="step-label">Paso 3 de 3</span>
+            <h2 id="step-3-title">Detalle y cierre</h2>
+            <p>Revisá los datos principales y completá el cierre.</p>
+          </div>
+
+          <aside class="registration-summary" aria-label="Resumen del registro">
+            <div><span>Fecha y hora</span><strong id="summaryDateTime">—</strong></div>
+            <div><span>Puesto</span><strong id="summaryPost">—</strong></div>
+            <div><span>Bandera</span><strong id="summaryFlag">—</strong></div>
+            <div><span>Tipo</span><strong id="summaryType">—</strong></div>
+          </aside>
 
           <div class="field">
             <label for="motivo">Motivo *</label>
@@ -165,14 +186,18 @@
             <textarea id="resolucion" name="resolucion" rows="3" placeholder="¿Cómo finalizó la intervención?" required></textarea>
           </div>
 
-          <div class="field field-last">
-            <label for="observaciones">Observaciones</label>
-            <textarea id="observaciones" name="observaciones" rows="3" placeholder="Información adicional (opcional)"></textarea>
+          <div class="field">
+            <label for="observaciones">Observaciones <span class="optional">(opcional)</span></label>
+            <textarea id="observaciones" name="observaciones" rows="3" placeholder="Información adicional"></textarea>
           </div>
-        </div>
 
-        <button type="submit" class="btn btn-primary submit-btn">Registrar intervención</button>
-        <p class="form-message" id="formMessage" role="status"></p>
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary form-back">Atrás</button>
+            <button type="submit" class="btn btn-primary">Registrar intervención</button>
+          </div>
+        </section>
+
+        <p class="form-feedback" id="stepFeedback" role="alert" aria-live="assertive"></p>
       </form>
     </section>
   </main>
