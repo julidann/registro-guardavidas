@@ -3,7 +3,7 @@
   "short_name": "Guardavidas",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#f5f2e9",
-  "theme_color": "#25a7c4",
+  "background_color": "#F7F7F5",
+  "theme_color": "#E95555",
   "description": "Registro de intervenciones para guardavidas de Monte Hermoso."
 }
