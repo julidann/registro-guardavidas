@@ -2321,3 +2321,26 @@ body {
 .form-next:focus-visible {
   outline-color: rgba(47, 125, 74, 0.28);
 }
+
+
+/* Progreso del formulario en verde */
+.form-progress li.is-current > span {
+  border-color: #2F7D4A;
+  background: #2F7D4A;
+  color: #FFFFFF;
+}
+
+.form-progress li.is-complete > span {
+  border-color: #2F7D4A;
+  background: #EAF5EE;
+  color: #2F7D4A;
+}
+
+.progress-track span {
+  background: #2F7D4A;
+}
+
+.form-progress li.is-current,
+.form-progress li.is-complete {
+  color: #244A32;
+}
