@@ -43,73 +43,150 @@
     <section class="history-page" aria-labelledby="history-title">
       <div class="history-page-head">
         <a href="index.html" class="back-link">‹ Volver al inicio</a>
-        <span class="section-kicker">REGISTROS</span>
+        <span class="section-kicker">ESTADÍSTICAS</span>
         <div class="history-page-title">
           <div>
-            <h1 id="history-title">Historial</h1>
-            <p>Filtrá las intervenciones por mes, tipo o puesto.</p>
+            <h1 id="history-title">Historial y análisis</h1>
+            <p>Una vista rápida de la actividad de la temporada.</p>
           </div>
           <button class="btn btn-secondary small-btn" id="exportBtn" type="button">Exportar CSV</button>
         </div>
       </div>
 
-      <div class="filters-card">
-        <div class="filters">
-          <div class="field">
-            <label for="filterMonth">Mes</label>
-            <input type="month" id="filterMonth">
+      <section class="history-overview" aria-label="Resumen general">
+        <article class="history-overview-card primary">
+          <span>Total de intervenciones</span>
+          <strong id="historyTotal">0</strong>
+          <small>temporada</small>
+        </article>
+
+        <article class="history-overview-card">
+          <span>Rescates</span>
+          <strong id="historyRescues">0</strong>
+          <small>registrados</small>
+        </article>
+
+        <article class="history-overview-card">
+          <span>Puestos con actividad</span>
+          <strong id="historyActivePosts">0</strong>
+          <small>de 19 puestos</small>
+        </article>
+      </section>
+
+      <section class="analytics-grid" aria-label="Gráficos">
+        <article class="analytics-card rescue-chart-card">
+          <div class="analytics-card-head">
+            <div>
+              <span class="section-kicker">RESCATES</span>
+              <h2>Distribución por puesto</h2>
+            </div>
           </div>
 
-          <div class="field">
-            <label for="filterType">Tipo</label>
-            <select id="filterType">
-              <option value="">Todos</option>
-              <option value="Rescate">Rescate</option>
-              <option value="Asistencia en agua">Asistencia en agua</option>
-              <option value="Asistencia fuera del agua">Asistencia fuera del agua</option>
-              <option value="Primeros auxilios">Primeros auxilios</option>
-              <option value="Rescate con semirrígido">Rescate con semirrígido</option>
-              <option value="Prevención">Prevención</option>
-              <option value="Otro">Otro</option>
-            </select>
+          <div class="donut-layout">
+            <div class="donut-chart" id="rescueDonut" aria-label="Distribución porcentual de rescates por puesto">
+              <div class="donut-center">
+                <strong id="rescueDonutTotal">0</strong>
+                <span>rescates</span>
+              </div>
+            </div>
+
+            <div class="donut-legend" id="rescueLegend"></div>
+          </div>
+        </article>
+
+        <article class="analytics-card">
+          <div class="analytics-card-head">
+            <div>
+              <span class="section-kicker">PUESTOS</span>
+              <h2>Mayor actividad</h2>
+            </div>
           </div>
 
-          <div class="field">
-            <label for="filterPost">Puesto</label>
-            <select id="filterPost">
-              <option value="">Todos los puestos</option>
-              <option value="Dientudo">1 - Dientudo</option>
-              <option value="Dunas">2 - Dunas</option>
-              <option value="Eslora">3 - Eslora</option>
-              <option value="Gaviotas">4 - Gaviotas</option>
-              <option value="Espigón">5 - Espigón</option>
-              <option value="Yate">6 - Yate</option>
-              <option value="Tamarisco">7 - Tamarisco</option>
-              <option value="Piedra Buena">8 - Piedra Buena</option>
-              <option value="Legh II">9 - Legh II</option>
-              <option value="Puesto Central">10 - Puesto Central</option>
-              <option value="Pelícano">11 - Pelícano</option>
-              <option value="Asolú">12 - Asolú</option>
-              <option value="Rambla">13 - Rambla</option>
-              <option value="Peatonal">14 - Peatonal</option>
-              <option value="Goleta">15 - Goleta</option>
-              <option value="Complejo">16 - Complejo</option>
-              <option value="Sorzales">17 - Sorzales</option>
-              <option value="Gavilán">18 - Gavilán</option>
-              <option value="Villa Caballero">19 - Villa Caballero</option>
-            </select>
+          <div class="post-ranking" id="postRanking"></div>
+        </article>
+      </section>
+
+      <section class="posts-section" aria-labelledby="posts-title">
+        <div class="section-bar">
+          <div>
+            <span class="section-kicker">DETALLE POR PUESTO</span>
+            <h2 id="posts-title">Intervenciones por puesto</h2>
           </div>
         </div>
-      </div>
 
-      <div class="history-list" id="historyList"></div>
+        <div class="post-cards-grid" id="postCards"></div>
+      </section>
 
-      <div class="empty-state" id="emptyState">
-        <span class="empty-icon">＋</span>
-        <strong>Todavía no hay registros</strong>
-        <p>Las intervenciones que cargues van a aparecer acá.</p>
-        <a href="register.html" class="empty-link">Registrar intervención</a>
-      </div>
+      <section class="records-section" aria-labelledby="records-title">
+        <div class="records-toggle-row">
+          <div>
+            <span class="section-kicker">REGISTROS</span>
+            <h2 id="records-title">Ver intervenciones una por una</h2>
+          </div>
+          <button class="btn btn-secondary small-btn" id="toggleRecordsBtn" type="button" aria-expanded="false">
+            Ver registros
+          </button>
+        </div>
+
+        <div class="records-panel" id="recordsPanel" hidden>
+          <div class="filters-card">
+            <div class="filters">
+              <div class="field">
+                <label for="filterMonth">Mes</label>
+                <input type="month" id="filterMonth">
+              </div>
+
+              <div class="field">
+                <label for="filterType">Tipo</label>
+                <select id="filterType">
+                  <option value="">Todos</option>
+                  <option value="Rescate">Rescate</option>
+                  <option value="Asistencia en agua">Asistencia en agua</option>
+                  <option value="Asistencia fuera del agua">Asistencia fuera del agua</option>
+                  <option value="Primeros auxilios">Primeros auxilios</option>
+                  <option value="Rescate con semirrígido">Rescate con semirrígido</option>
+                  <option value="Prevención">Prevención</option>
+                  <option value="Otro">Otro</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="filterPost">Puesto</label>
+                <select id="filterPost">
+                  <option value="">Todos los puestos</option>
+                  <option value="Dientudo">1 - Dientudo</option>
+                  <option value="Dunas">2 - Dunas</option>
+                  <option value="Eslora">3 - Eslora</option>
+                  <option value="Gaviotas">4 - Gaviotas</option>
+                  <option value="Espigón">5 - Espigón</option>
+                  <option value="Yate">6 - Yate</option>
+                  <option value="Tamarisco">7 - Tamarisco</option>
+                  <option value="Piedra Buena">8 - Piedra Buena</option>
+                  <option value="Legh II">9 - Legh II</option>
+                  <option value="Puesto Central">10 - Puesto Central</option>
+                  <option value="Pelícano">11 - Pelícano</option>
+                  <option value="Asolú">12 - Asolú</option>
+                  <option value="Rambla">13 - Rambla</option>
+                  <option value="Peatonal">14 - Peatonal</option>
+                  <option value="Goleta">15 - Goleta</option>
+                  <option value="Complejo">16 - Complejo</option>
+                  <option value="Sorzales">17 - Sorzales</option>
+                  <option value="Gavilán">18 - Gavilán</option>
+                  <option value="Villa Caballero">19 - Villa Caballero</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="history-list" id="historyList"></div>
+
+          <div class="empty-state" id="emptyState">
+            <span class="empty-icon">＋</span>
+            <strong>No hay registros con esos filtros</strong>
+            <p>Probá cambiando el mes, tipo o puesto.</p>
+          </div>
+        </div>
+      </section>
     </section>
   </main>
 
