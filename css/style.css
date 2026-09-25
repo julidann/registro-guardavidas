@@ -1143,3 +1143,72 @@ button {
     height: 25px;
   }
 }
+
+
+/* Alertas operativas */
+
+.active-alerts-banner {
+  margin-top: 18px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #eef0f3;
+}
+
+.alert-status-icon {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #d9dde3;
+  color: #6f7782;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.alert-status-copy strong,
+.alert-status-copy small {
+  display: block;
+}
+
+.alert-status-copy strong {
+  margin-top: 3px;
+  color: var(--primary);
+  font-size: 14px;
+}
+
+.alert-status-copy small {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+/* Preparado para alertas reales */
+.active-alerts-banner.is-warning {
+  background: #fff7dd;
+  border-color: #efd77b;
+}
+
+.active-alerts-banner.is-warning .alert-status-icon {
+  background: #f2c94c;
+  color: #1f2937;
+}
+
+.active-alerts-banner.is-danger {
+  background: #fff0f0;
+  border-color: #e9b9b9;
+}
+
+.active-alerts-banner.is-danger .alert-status-icon {
+  background: #c93f3f;
+  color: #fff;
+}
+
+.active-alerts-banner.is-danger .alert-status-copy strong {
+  color: #a93232;
+}
