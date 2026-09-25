@@ -2,6 +2,15 @@ const STORAGE_KEY = "registro_guardavidas_intervenciones";
 const WEATHER_CACHE_KEY = "registro_guardavidas_clima_monte_hermoso";
 const DEMO_SEED_KEY = "registro_guardavidas_demo_v1";
 const LAST_CREATED_KEY = "registro_guardavidas_ultimo_registro";
+const TIDES_BY_DATE = {
+  "2026-09-25": [
+    { type: "Pleamar", time: "04:42", height: "2,55 m" },
+    { type: "Bajamar", time: "10:39", height: "1,39 m" },
+    { type: "Pleamar", time: "16:49", height: "2,69 m" },
+    { type: "Bajamar", time: "23:15", height: "1,13 m" }
+  ]
+};
+
 const POSTS = [
   "Dientudo",
   "Dunas",
@@ -339,6 +348,44 @@ async function loadWeather() {
       document.getElementById("weatherWind").textContent = "Viento -- · -- km/h";
     }
   }
+}
+
+function renderTides() {
+  const grid = document.getElementById("tidesGrid");
+
+  if (!grid) {
+    return;
+  }
+
+  const tides = TIDES_BY_DATE[getToday()];
+
+  if (!tides) {
+    return;
+  }
+
+  const now = getCurrentTime();
+  let nextIndex = tides.findIndex(function (tide) {
+    return tide.time > now;
+  });
+
+  grid.innerHTML = "";
+
+  tides.forEach(function (tide, index) {
+    const card = document.createElement("article");
+    const isHigh = tide.type === "Pleamar";
+
+    card.className =
+      "tide-card " +
+      (isHigh ? "tide-high" : "tide-low") +
+      (index === nextIndex ? " is-next" : "");
+
+    card.innerHTML =
+      "<span>" + tide.type + "</span>" +
+      "<strong>" + tide.time + "</strong>" +
+      "<small>" + tide.height + "</small>";
+
+    grid.appendChild(card);
+  });
 }
 
 function updateHomeDashboard() {
@@ -859,6 +906,7 @@ function showSuccessToast() {
 
 function updateAll() {
   updateToday();
+  renderTides();
   updateHomeDashboard();
   updateSeasonSummary();
   updateMonthSummary();
