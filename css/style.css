@@ -6,7 +6,7 @@
   --border: #e5e7eb;
   --primary: #26314f;
   --danger: #d94a4a;
-  --accent: #2f9fa3;
+  --accent: #f2c94c;
   --radius: 14px;
 }
 
@@ -299,9 +299,9 @@ button {
 
 .form-progress li.is-current > span,
 .form-progress li.is-complete > span {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: white;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--primary);
 }
 
 .progress-track {
