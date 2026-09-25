@@ -341,6 +341,66 @@ async function loadWeather() {
   }
 }
 
+function updateHomeDashboard() {
+  const recentList = document.getElementById("homeRecentList");
+  const flag = document.getElementById("homeFlag");
+  const flagMeta = document.getElementById("homeFlagMeta");
+
+  if (!recentList && !flag) {
+    return;
+  }
+
+  const todayItems = interventions
+    .filter(function (item) {
+      return item.fecha === getToday();
+    })
+    .sort(function (a, b) {
+      return b.hora.localeCompare(a.hora);
+    });
+
+  const stats = getStats(todayItems);
+  setText("homeRescues", stats.rescates);
+  setText("homeFirstAid", stats.primerosAuxilios);
+
+  if (flag) {
+    if (todayItems.length > 0) {
+      flag.textContent = todayItems[0].bandera || "Sin dato";
+
+      if (flagMeta) {
+        flagMeta.textContent = "Última registrada hoy · " + todayItems[0].hora + " hs";
+      }
+    } else {
+      flag.textContent = "Sin registros hoy";
+
+      if (flagMeta) {
+        flagMeta.textContent = "La bandera se toma del último registro del día";
+      }
+    }
+  }
+
+  if (!recentList) {
+    return;
+  }
+
+  recentList.innerHTML = "";
+
+  if (todayItems.length === 0) {
+    recentList.innerHTML = '<p class="recent-empty">Todavía no hay intervenciones registradas hoy.</p>';
+    return;
+  }
+
+  todayItems.slice(0, 3).forEach(function (item) {
+    const row = document.createElement("article");
+    row.className = "recent-item";
+    row.innerHTML =
+      '<span class="recent-time">' + item.hora + '</span>' +
+      '<div class="recent-main"><strong>' + item.tipo + '</strong><span>' + item.lugar + '</span></div>' +
+      '<span class="recent-post">' + item.puesto + '</span>';
+
+    recentList.appendChild(row);
+  });
+}
+
 function updateToday() {
   const todayTotal = document.getElementById("todayTotal");
   const todayDate = document.getElementById("todayDate");
@@ -799,6 +859,7 @@ function showSuccessToast() {
 
 function updateAll() {
   updateToday();
+  updateHomeDashboard();
   updateSeasonSummary();
   updateMonthSummary();
   renderHistoryAnalytics();
