@@ -691,7 +691,7 @@ button {
 }
 
 .bottom-nav a[aria-current="page"] {
-  color: var(--primary);
+  color: #c93f3f;
 }
 
 .bottom-nav svg {
