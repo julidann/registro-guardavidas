@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><meta name="theme-color" content="#26314f"><title>Registro Guardavidas</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"><link rel="manifest" href="manifest.json"></head>
-<body><header class="app-header"><div class="app-header-inner"><a href="index.html" class="brand"><span class="brand-icon">+</span><strong>Guardavidas</strong></a></div></header>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><meta name="theme-color" content="#c93f3f"><title>Registro Guardavidas</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"><link rel="manifest" href="manifest.json"></head>
+<body class="page-home"><header class="app-header"><div class="app-header-inner"><a href="index.html" class="brand"><span class="brand-icon">+</span><strong>Guardavidas</strong></a></div></header>
 <main class="app-shell home-minimal"><section class="home-hero"><div><span class="location-label">Monte Hermoso</span><h1>Hoy</h1><p class="screen-date" id="todayDate"></p></div><div class="weather-chip" id="weatherChip"><span id="weatherIcon">☀️</span><div><strong id="weatherTemp">--°</strong><span id="weatherLabel">Cargando...</span><small id="weatherWind">Viento -- · -- km/h</small></div></div></section><section class="tides-section">
     <div class="dashboard-section-head">
       <div>
@@ -33,10 +33,13 @@
     <small class="tides-source">Predicción oficial · Monte Hermoso</small>
   </section>
 
-  <section class="sea-status-card">
-    <div>
-      <span class="dashboard-label">Condición registrada</span>
-      <strong id="homeFlag">Sin registros hoy</strong>
+  <section class="sea-status-card flag-neutral" id="seaStatusCard">
+    <div class="sea-status-main">
+      <span class="flag-swatch" id="homeFlagSwatch" aria-hidden="true"></span>
+      <div>
+        <span class="dashboard-label">Condición registrada</span>
+        <strong id="homeFlag">Sin registros hoy</strong>
+      </div>
     </div>
     <small id="homeFlagMeta">La bandera se toma del último registro del día</small>
   </section>
