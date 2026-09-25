@@ -6,7 +6,8 @@
   --border: #e5e7eb;
   --primary: #26314f;
   --danger: #d94a4a;
-  --accent: #f2c94c;
+  --accent: #2f9fa3;
+  --yellow: #f2c94c;
   --radius: 14px;
 }
 
@@ -299,8 +300,8 @@ button {
 
 .form-progress li.is-current > span,
 .form-progress li.is-complete > span {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--yellow);
+  border-color: var(--yellow);
   color: var(--primary);
 }
 
@@ -314,7 +315,7 @@ button {
 .progress-track span {
   display: block;
   height: 100%;
-  background: var(--accent);
+  background: var(--yellow);
   transition: width .2s ease;
 }
 
@@ -779,5 +780,175 @@ button {
 
   .records-toggle-row {
     align-items: flex-start;
+  }
+}
+
+
+/* Dashboard de inicio */
+
+.dashboard-label {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.sea-status-card {
+  margin-top: 28px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.sea-status-card strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--primary);
+  font-size: 18px;
+}
+
+.sea-status-card small {
+  max-width: 250px;
+  color: var(--muted);
+  text-align: right;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.today-dashboard,
+.recent-section {
+  margin-top: 28px;
+}
+
+.dashboard-section-head {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.dashboard-section-head h2 {
+  margin: 3px 0 0;
+  color: var(--primary);
+  font-size: 17px;
+}
+
+.dashboard-section-head a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 11px;
+}
+
+.today-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.today-stats article {
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.today-stats strong,
+.today-stats span {
+  display: block;
+}
+
+.today-stats strong {
+  color: var(--primary);
+  font-size: 28px;
+}
+
+.today-stats span {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.recent-list {
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.recent-item {
+  padding: 13px 15px;
+  display: grid;
+  grid-template-columns: 58px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.recent-item:last-child {
+  border-bottom: 0;
+}
+
+.recent-time {
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.recent-main strong,
+.recent-main span {
+  display: block;
+}
+
+.recent-main strong {
+  color: var(--text);
+  font-size: 12px;
+}
+
+.recent-main span,
+.recent-post {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.recent-empty {
+  margin: 0;
+  padding: 20px 15px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 12px;
+}
+
+@media (max-width: 520px) {
+  .sea-status-card {
+    align-items: flex-start;
+  }
+
+  .sea-status-card small {
+    max-width: 145px;
+  }
+
+  .today-stats article {
+    padding: 14px 10px;
+  }
+
+  .today-stats strong {
+    font-size: 24px;
+  }
+
+  .recent-item {
+    grid-template-columns: 50px 1fr;
+  }
+
+  .recent-post {
+    grid-column: 2;
   }
 }
