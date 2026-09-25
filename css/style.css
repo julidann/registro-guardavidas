@@ -1038,3 +1038,108 @@ button {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+
+/* Identidad guardavidas en Inicio */
+
+.page-home .app-header {
+  background: #c93f3f;
+  border-bottom-color: #b83737;
+}
+
+.page-home .brand {
+  color: #fff;
+}
+
+.page-home .brand-icon {
+  background: rgba(255,255,255,.16);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.28);
+}
+
+.page-home .home-hero {
+  padding: 20px;
+  background: #fff1f1;
+  border: 1px solid #f2d3d3;
+  border-radius: 18px;
+}
+
+.page-home .home-hero h1 {
+  color: #a93232;
+}
+
+.page-home .location-label {
+  color: #b34a4a;
+}
+
+.page-home .today-stats article:first-child {
+  border-color: #f0cece;
+  background: #fff5f5;
+}
+
+.page-home .today-stats article:first-child strong {
+  color: #c93f3f;
+}
+
+.page-home .bottom-nav a[aria-current="page"] {
+  color: #c93f3f;
+}
+
+/* Bandera / condición del mar */
+
+.sea-status-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.flag-swatch {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid rgba(31,41,55,.12);
+  background: #e5e7eb;
+}
+
+.sea-status-card.flag-good {
+  background: #f3fbfe;
+  border-color: #cdeaf5;
+}
+
+.sea-status-card.flag-good .flag-swatch {
+  background: #78cceb;
+}
+
+.sea-status-card.flag-doubt {
+  background: #fffbed;
+  border-color: #f0df9b;
+}
+
+.sea-status-card.flag-doubt .flag-swatch {
+  background: linear-gradient(135deg, #f2c94c 0 50%, #1f2937 50% 100%);
+}
+
+.sea-status-card.flag-danger {
+  background: #fff1f1;
+  border-color: #efcaca;
+}
+
+.sea-status-card.flag-danger .flag-swatch {
+  background: linear-gradient(135deg, #d94a4a 0 50%, #1f2937 50% 100%);
+}
+
+.sea-status-card.flag-neutral .flag-swatch {
+  background: #dfe3e8;
+}
+
+@media (max-width: 520px) {
+  .page-home .home-hero {
+    padding: 18px;
+  }
+
+  .flag-swatch {
+    width: 38px;
+    height: 25px;
+  }
+}
