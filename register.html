@@ -9,7 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">\n  <link rel="stylesheet" href="css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="manifest" href="manifest.json">
 </head>
 
@@ -18,23 +19,14 @@
     <div class="app-header-inner">
       <a href="index.html" class="brand" aria-label="Registro Guardavidas - Inicio">
         <span class="brand-icon" aria-hidden="true">+</span>
-        <span class="brand-copy">
-          <strong>REGISTRO</strong>
-          <small>GUARDAVIDAS</small>
-        </span>
+        <strong>Guardavidas</strong>
       </a>
-
-      <div class="header-status">
-        <span class="status-dot" aria-hidden="true"></span>
-        <span>En servicio</span>
-      </div>
-
-      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
 
       <nav class="nav" id="nav" aria-label="Navegación principal">
-        <a href="index.html"><span class="nav-icon">⌂</span><span>Inicio</span></a>
-        <a href="register.html" aria-current="page"><span class="nav-icon">＋</span><span>Registrar</span></a>
-        <a href="history.html"><span class="nav-icon">≡</span><span>Historial</span></a>
+        <a href="index.html"><span>Inicio</span></a>
+        <a href="register.html" aria-current="page"><span>Registrar</span></a>
+        <a href="history.html"><span>Historial</span></a>
       </nav>
     </div>
   </header>
@@ -42,21 +34,8 @@
   <main class="app-shell register-shell">
     <section class="register-page" aria-labelledby="register-title">
       <div class="register-page-head">
-        <a href="index.html" class="back-link">‹ Volver al inicio</a>
-        <span class="section-kicker">NUEVO REGISTRO</span>
+        <a href="index.html" class="back-link">‹ Inicio</a>
         <h1 id="register-title">Nueva intervención</h1>
-        <p>Completá los 3 pasos. Al guardar, volvés automáticamente al inicio con la confirmación del registro.</p>
-
-        <details class="task-help">
-          <summary>¿Cómo registrar una intervención?</summary>
-          <div class="task-help-content">
-            <p><strong>1.</strong> Cargá fecha, hora, puesto y bandera.</p>
-            <p><strong>2.</strong> Indicá qué tipo de intervención fue y dónde ocurrió.</p>
-            <p><strong>3.</strong> Revisá el resumen, completá motivo y resolución, y confirmá el registro.</p>
-          </div>
-        </details>
-
-        <p class="required-note"><span>*</span> Campos obligatorios</p>
       </div>
 
       <div class="form-progress-wrap" aria-label="Progreso del registro">
@@ -77,9 +56,7 @@
       <form class="intervention-form" id="interventionForm" novalidate>
         <section class="form-step" data-form-step="0" aria-labelledby="step-1-title">
           <div class="form-step-head">
-            <span class="step-label">Paso 1 de 3</span>
             <h2 id="step-1-title">Datos básicos</h2>
-            <p>Cuándo ocurrió y en qué puesto.</p>
           </div>
 
           <div class="form-row two-columns">
@@ -137,9 +114,7 @@
 
         <section class="form-step" data-form-step="1" aria-labelledby="step-2-title" hidden>
           <div class="form-step-head">
-            <span class="step-label">Paso 2 de 3</span>
             <h2 id="step-2-title">Intervención</h2>
-            <p>Qué pasó y en qué sector.</p>
           </div>
 
           <div class="field">
@@ -175,9 +150,7 @@
 
         <section class="form-step" data-form-step="2" aria-labelledby="step-3-title" hidden>
           <div class="form-step-head">
-            <span class="step-label">Paso 3 de 3</span>
             <h2 id="step-3-title">Detalle y cierre</h2>
-            <p>Revisá los datos principales y completá el cierre.</p>
           </div>
 
           <aside class="registration-summary" aria-label="Resumen del registro">
@@ -212,10 +185,6 @@
       </form>
     </section>
   </main>
-
-  <footer class="app-footer">
-    <span>Registro Guardavidas · Monte Hermoso</span>
-  </footer>
 
   <script src="js/app.js"></script>
 </body>
