@@ -1212,3 +1212,34 @@ button {
 .active-alerts-banner.is-danger .alert-status-copy strong {
   color: #a93232;
 }
+
+
+/* Hero clima */
+
+.home-date-block {
+  min-width: 0;
+}
+
+.home-weather-icon {
+  margin-top: 8px;
+  font-size: 52px;
+  line-height: 1;
+}
+
+.page-home .home-weather-icon {
+  filter: drop-shadow(0 4px 8px rgba(201,63,63,.08));
+}
+
+.home-hero .weather-chip {
+  align-self: center;
+}
+
+.home-hero .weather-chip > span {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .home-weather-icon {
+    font-size: 46px;
+  }
+}
