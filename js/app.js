@@ -392,6 +392,7 @@ function updateHomeDashboard() {
   const recentList = document.getElementById("homeRecentList");
   const flag = document.getElementById("homeFlag");
   const flagMeta = document.getElementById("homeFlagMeta");
+  const seaStatusCard = document.getElementById("seaStatusCard");
 
   if (!recentList && !flag) {
     return;
@@ -411,13 +412,33 @@ function updateHomeDashboard() {
 
   if (flag) {
     if (todayItems.length > 0) {
-      flag.textContent = todayItems[0].bandera || "Sin dato";
+      const currentFlag = todayItems[0].bandera || "Sin dato";
+      flag.textContent = currentFlag;
+
+      if (seaStatusCard) {
+        seaStatusCard.classList.remove("flag-good", "flag-doubt", "flag-danger", "flag-neutral");
+
+        if (currentFlag === "Mar bueno") {
+          seaStatusCard.classList.add("flag-good");
+        } else if (currentFlag === "Mar dudoso") {
+          seaStatusCard.classList.add("flag-doubt");
+        } else if (currentFlag === "Mar peligroso") {
+          seaStatusCard.classList.add("flag-danger");
+        } else {
+          seaStatusCard.classList.add("flag-neutral");
+        }
+      }
 
       if (flagMeta) {
         flagMeta.textContent = "Última registrada hoy · " + todayItems[0].hora + " hs";
       }
     } else {
       flag.textContent = "Sin registros hoy";
+
+      if (seaStatusCard) {
+        seaStatusCard.classList.remove("flag-good", "flag-doubt", "flag-danger");
+        seaStatusCard.classList.add("flag-neutral");
+      }
 
       if (flagMeta) {
         flagMeta.textContent = "La bandera se toma del último registro del día";
