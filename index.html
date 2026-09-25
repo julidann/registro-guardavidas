@@ -1,7 +1,40 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><meta name="theme-color" content="#26314f"><title>Registro Guardavidas</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"><link rel="manifest" href="manifest.json"></head>
 <body><header class="app-header"><div class="app-header-inner"><a href="index.html" class="brand"><span class="brand-icon">+</span><strong>Guardavidas</strong></a></div></header>
-<main class="app-shell home-minimal"><section class="home-hero"><div><span class="location-label">Monte Hermoso</span><h1>Hoy</h1><p class="screen-date" id="todayDate"></p></div><div class="weather-chip" id="weatherChip"><span id="weatherIcon">☀️</span><div><strong id="weatherTemp">--°</strong><span id="weatherLabel">Cargando...</span><small id="weatherWind">Viento -- · -- km/h</small></div></div></section><section class="today-minimal"><span>Intervenciones de hoy</span><strong id="todayTotal">0</strong></section><a href="register.html" class="register-main-btn">＋ Registrar intervención</a><a href="history.html" class="history-link">Ver historial →</a></main>
+<main class="app-shell home-minimal"><section class="home-hero"><div><span class="location-label">Monte Hermoso</span><h1>Hoy</h1><p class="screen-date" id="todayDate"></p></div><div class="weather-chip" id="weatherChip"><span id="weatherIcon">☀️</span><div><strong id="weatherTemp">--°</strong><span id="weatherLabel">Cargando...</span><small id="weatherWind">Viento -- · -- km/h</small></div></div></section><section class="sea-status-card">
+    <div>
+      <span class="dashboard-label">Condición registrada</span>
+      <strong id="homeFlag">Sin registros hoy</strong>
+    </div>
+    <small id="homeFlagMeta">La bandera se toma del último registro del día</small>
+  </section>
+
+  <section class="today-dashboard">
+    <div class="dashboard-section-head">
+      <div>
+        <span class="dashboard-label">Actividad</span>
+        <h2>Hoy</h2>
+      </div>
+    </div>
+    <div class="today-stats">
+      <article><strong id="todayTotal">0</strong><span>Intervenciones</span></article>
+      <article><strong id="homeRescues">0</strong><span>Rescates</span></article>
+      <article><strong id="homeFirstAid">0</strong><span>1° auxilios</span></article>
+    </div>
+  </section>
+
+  <section class="recent-section">
+    <div class="dashboard-section-head">
+      <div>
+        <span class="dashboard-label">Actividad reciente</span>
+        <h2>Últimas intervenciones</h2>
+      </div>
+      <a href="history.html">Ver historial</a>
+    </div>
+    <div class="recent-list" id="homeRecentList">
+      <p class="recent-empty">Todavía no hay intervenciones registradas hoy.</p>
+    </div>
+  </section></main>
 <div class="success-toast" id="successToast" role="status" aria-live="polite"><span>✓ Intervención registrada</span><button type="button" class="toast-action" id="undoRegistrationBtn">Deshacer</button></div>
 <nav class="bottom-nav" aria-label="Navegación principal">
   <a href="index.html" aria-current="page">
