@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><meta name="theme-color" content="#c93f3f"><title>Registro Guardavidas</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"><link rel="manifest" href="manifest.json"></head>
 <body class="page-home"><header class="app-header"><div class="app-header-inner"><a href="index.html" class="brand"><span class="brand-icon">+</span><strong>Guardavidas</strong></a></div></header>
-<main class="app-shell home-minimal"><section class="home-hero"><div><span class="location-label">Monte Hermoso</span><h1>Hoy</h1><p class="screen-date" id="todayDate"></p></div><div class="weather-chip" id="weatherChip"><span id="weatherIcon">☀️</span><div><strong id="weatherTemp">--°</strong><span id="weatherLabel">Cargando...</span><small id="weatherWind">Viento -- · -- km/h</small></div></div></section>
+<main class="app-shell home-minimal"><section class="home-hero">
+    <div class="home-date-block">
+      <span class="location-label">Monte Hermoso</span>
+      <div class="home-weather-icon" id="weatherIcon" aria-hidden="true">☀️</div>
+      <p class="screen-date" id="todayDate"></p>
+    </div>
+    <div class="weather-chip" id="weatherChip">
+      <div>
+        <strong id="weatherTemp">--°</strong>
+        <span id="weatherLabel">Cargando...</span>
+        <small id="weatherWind">Viento -- · -- km/h</small>
+      </div>
+    </div>
+  </section>
 
   <section class="active-alerts-banner is-empty" id="activeAlertsBanner" aria-live="polite">
     <div class="alert-status-icon" aria-hidden="true">!</div>
